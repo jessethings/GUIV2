@@ -85,6 +85,7 @@
     <Compile Include="Scripts\FileReader.cs" />
     <Compile Include="Scripts\LoginClass.cs" />
     <Compile Include="Scripts\ManageData.cs" />
+    <Compile Include="Scripts\UploadData.cs" />
     <Compile Include="Scripts\utilities.cs" />
     <Compile Include="Scripts\WeeklyData.cs" />
     <Compile Include="Uploader.xaml.cs">
