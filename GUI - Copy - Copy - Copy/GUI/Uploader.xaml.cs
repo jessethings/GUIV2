@@ -145,7 +145,7 @@ namespace GUI
             calculations = ManageData.CalcLoadData();
             Console.WriteLine($"{weekly.Count} {comments.Count} {paddocks.Count} {farmsupp.Count} {labels.Count} {calculations.Count}");
 
-           /*if (weekly != null && !isProcessing)
+           if (weekly != null && !isProcessing)
             {
                 isProcessing = true;
                 try
@@ -161,7 +161,7 @@ namespace GUI
                     MessageBox.Show(ie.ToString());
                     tmp = true;
                 }
-            }*/
+            }
             if (farmsupp != null)
             {
                 try
