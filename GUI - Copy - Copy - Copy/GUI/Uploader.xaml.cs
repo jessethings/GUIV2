@@ -135,28 +135,26 @@ namespace GUI
         private void butUploadMemoryData_Click(object sender, RoutedEventArgs e)
         {
             bool tmp = false;
-            if (weekly != null && !isProcessing)
+
+            //populate the lists
+            weekly = ManageData.WeeklyLoadData();
+            comments = ManageData.CommentsLoadData();
+            try { paddocks = ManageData.PaddocksLoadData(); } catch (Exception ie) { }
+            farmsupp = ManageData.FarmSuppLoadData();
+            labels = ManageData.LabelLoadData();
+            calculations = ManageData.CalcLoadData();
+            MessageBox.Show($"{weekly.Count} {comments.Count} {paddocks.Count} {farmsupp.Count} {labels.Count} {calculations.Count}");
+
+           if (weekly != null && !isProcessing)
             {
                 isProcessing = true;
-                weekly = ManageData.WeeklyLoadData();
-                comments = ManageData.CommentsLoadData();
-                try { paddocks = ManageData.PaddocksLoadData(); } catch (Exception ie) { }
-                farmsupp = ManageData.FarmSuppLoadData();
-                labels = ManageData.LabelLoadData();
-                calculations = ManageData.CalcLoadData();
-
                 try
                 {
                     this.Cursor = Cursors.Wait;
-                    //UploadData(new WeeklyData(1, 42, DateTime.Now, "HelloWorld"));
-                    //UploadDataGet(new WeeklyData(1, 42, DateTime.Now, "HelloWorld"));
-
                     foreach (WeeklyData wdata in weekly)
                     {
                         UploadData.UploadDataGet(wdata);
-                    }
-
-                    this.Cursor = Cursors.Arrow;                    
+                    }                
                 }
                 catch (Exception ie)
                 {
@@ -173,7 +171,6 @@ namespace GUI
                     {
                         UploadData.UploadFarmSuppGet(fsdata);
                     }
-                    this.Cursor = Cursors.Arrow;
                 }
                 catch (Exception ie)
                 {
@@ -190,7 +187,6 @@ namespace GUI
                     {
                         UploadData.UploadPaddocksGet(pdata);
                     }
-                    this.Cursor = Cursors.Arrow;
                 }
                 catch (Exception ie)
                 {
@@ -207,7 +203,38 @@ namespace GUI
                     {
                         UploadData.UploadCommentsGet(cdata);
                     }
-                    this.Cursor = Cursors.Arrow;
+                }
+                catch (Exception ie)
+                {
+                    MessageBox.Show(ie.ToString());
+                    tmp = true;
+                }
+            }
+            if (labels != null && !isProcessing)
+            {
+                try
+                {
+                    this.Cursor = Cursors.Wait;
+                    foreach (Labels ldata in labels)
+                    {
+                        UploadData.UploadLabelsGet(ldata);
+                    }
+                }
+                catch (Exception ie)
+                {
+                    MessageBox.Show(ie.ToString());
+                    tmp = true;
+                }
+            }
+            if (calculations != null && !isProcessing)
+            {
+                try
+                {
+                    this.Cursor = Cursors.Wait;
+                    foreach (Calculations cdata in calculations)
+                    {
+                        UploadData.UploadCalculationGet(cdata);
+                    }
                 }
                 catch (Exception ie)
                 {
@@ -220,6 +247,7 @@ namespace GUI
                 UpdateUploadStatus(UploadStatus.UploadLocal);
                 uploadIsComplete = true;
             }
+            this.Cursor = Cursors.Arrow;
             isProcessing = false;
         }
 
