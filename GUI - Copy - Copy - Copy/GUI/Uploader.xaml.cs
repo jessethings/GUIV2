@@ -143,9 +143,9 @@ namespace GUI
             farmsupp = ManageData.FarmSuppLoadData();
             labels = ManageData.LabelLoadData();
             calculations = ManageData.CalcLoadData();
-            MessageBox.Show($"{weekly.Count} {comments.Count} {paddocks.Count} {farmsupp.Count} {labels.Count} {calculations.Count}");
+            Console.WriteLine($"{weekly.Count} {comments.Count} {paddocks.Count} {farmsupp.Count} {labels.Count} {calculations.Count}");
 
-           if (weekly != null && !isProcessing)
+           /*if (weekly != null && !isProcessing)
             {
                 isProcessing = true;
                 try
@@ -161,8 +161,8 @@ namespace GUI
                     MessageBox.Show(ie.ToString());
                     tmp = true;
                 }
-            }
-            if (farmsupp != null && !isProcessing)
+            }*/
+            if (farmsupp != null)
             {
                 try
                 {
@@ -178,7 +178,7 @@ namespace GUI
                     tmp = true;
                 }
             }
-            if (paddocks != null && !isProcessing)
+            if (paddocks != null)
             {
                 try
                 {
@@ -194,7 +194,7 @@ namespace GUI
                     tmp = true;
                 }
             }
-            if (paddocks != null && !isProcessing)
+            if (paddocks != null)
             {
                 try
                 {
@@ -210,7 +210,7 @@ namespace GUI
                     tmp = true;
                 }
             }
-            if (labels != null && !isProcessing)
+            if (labels != null)
             {
                 try
                 {
@@ -226,7 +226,7 @@ namespace GUI
                     tmp = true;
                 }
             }
-            if (calculations != null && !isProcessing)
+            if (calculations != null)
             {
                 try
                 {

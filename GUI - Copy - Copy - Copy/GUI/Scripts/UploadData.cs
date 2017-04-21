@@ -41,7 +41,7 @@ namespace GUI.Scripts
 
         public static void UploadFarmSuppGet(FarmSupplements sup)
         {
-            string url = string.Format("http://swartkat.fossul.com/data/insertfarmsupplements?farmid={0}&sdate={1}&cows={2}&supplements={3}", sup.FarmID, sup.Sdate.ToString("yyyy-MM-dd"), sup.Cows, sup.Supplements);
+            string url = string.Format("http://swartkat.fossul.com/data/insertfarmsupplements?farmid={0}&sdate={1}&cows={2}&supplement={3}", sup.FarmID, sup.Sdate.ToString("yyyy-MM-dd"), sup.Cows, sup.Supplements);
             UploadGet(url);
         }
 
