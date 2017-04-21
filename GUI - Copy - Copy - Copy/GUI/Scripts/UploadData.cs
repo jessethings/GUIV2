@@ -35,31 +35,31 @@ namespace GUI.Scripts
 
         public static void UploadPaddocksGet(Paddocks padd)
         {
-            string url = string.Format("http://swartkat.fossul.com/data/insertdata?farmid={0}&sdate={1}&data={2}", wdata.FarmID, wdata.Sdate.ToString("yyyy-MM-dd"), wdata.Data);
+            string url = string.Format("http://swartkat.fossul.com/data/insertlabels?farmid={0}&sdate={1}&paddockid={2}&crop={3}&size={4}", padd.FarmID, padd.Sdate.ToString("yyyy-MM-dd"), padd.PaddockID, padd.Crop, padd.Size);
             UploadGet(url);
         }
 
         public static void UploadFarmSuppGet(FarmSupplements sup)
         {
-            string url = string.Format("http://swartkat.fossul.com/data/insertdata?farmid={0}&sdate={1}&data={2}", wdata.FarmID, wdata.Sdate.ToString("yyyy-MM-dd"), wdata.Data);
+            string url = string.Format("http://swartkat.fossul.com/data/insertfarmsupplements?farmid={0}&sdate={1}&cows={2}&supplements={3}", sup.FarmID, sup.Sdate.ToString("yyyy-MM-dd"), sup.Cows, sup.Supplements);
             UploadGet(url);
         }
 
         public static void UploadCommentsGet(Comments com)
         {
-            string url = string.Format("http://swartkat.fossul.com/data/insertdata?farmid={0}&sdate={1}&data={2}", wdata.FarmID, wdata.Sdate.ToString("yyyy-MM-dd"), wdata.Data);
+            string url = string.Format("http://swartkat.fossul.com/data/insertcomments?farmid={0}&sdate={1}&category={2}&description={3}", com.FarmID, com.Sdate.ToString("yyyy-MM-dd"), com.Category, com.Description);
             UploadGet(url);
         }
 
         public static void UploadLabelsGet(Labels label)
         {
-            string url = string.Format("http://swartkat.fossul.com/data/insertdata?farmid={0}&sdate={1}&data={2}", wdata.FarmID, wdata.Sdate.ToString("yyyy-MM-dd"), wdata.Data);
+            string url = string.Format("http://swartkat.fossul.com/data/insertlabels?row={0}&label={1}", label.Row, label.Label);
             UploadGet(url);
         }
 
         public static void UploadCalculationGet(Calculations calc)
         {
-            string url = string.Format("http://swartkat.fossul.com/data/insertdata?farmid={0}&sdate={1}&data={2}", wdata.FarmID, wdata.Sdate.ToString("yyyy-MM-dd"), wdata.Data);
+            string url = string.Format("http://swartkat.fossul.com/data/insertcalc?row={0}&formula={1}", calc.Row, calc.Formula);
             UploadGet(url);
         }
     }

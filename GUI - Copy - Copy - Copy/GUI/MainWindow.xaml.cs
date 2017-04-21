@@ -27,15 +27,15 @@ namespace GUI
         {
             InitializeComponent();
             LoadData();
-            AttemptLogin();
+            AttemptLogin(true);
         }
 
         private void LoadData()
         {
-            if (File.Exists("save.tf"))
+            if (File.Exists(Utilities.SAVE_DATA_URL))
             {
                 Dictionary<string, string> savedata = new Dictionary<string, string>();
-                foreach(string line in File.ReadLines(@"save.tf", Encoding.UTF8))
+                foreach(string line in File.ReadLines(Utilities.SAVE_DATA_URL, Encoding.UTF8))
                 {
                     string[] tmp = line.Split('-');
                     savedata.Add(tmp[0], tmp[1]);
@@ -53,27 +53,28 @@ namespace GUI
             }
         }
 
-        private void AttemptLogin()
+        private void AttemptLogin(bool quiet = false)
         {
             string s = LoginClass.IsAbleToAutologin(txtUsername.Text, txtPassword.Password);
             if (s == "")
-                Login();
-            else
+                Login(txtUsername.Text);
+            else if (!quiet)
                 MessageBox.Show(s);
         }
 
-        private void Login()
+        private void Login(string farmName)
         {
-            SaveData();
+            if (chkRememberMe.IsChecked == true)
+                SaveData();
             Uploader u = new Uploader();
+            u.SetFarmName(farmName);
             this.Close();
-            u.ShowDialog();
-            
+            u.ShowDialog();           
         }
 
         private void SaveData()
         {
-            StreamWriter file = new StreamWriter("save.tf");
+            StreamWriter file = new StreamWriter(Utilities.SAVE_DATA_URL);
             if (chkRememberMe.IsChecked == true)
             {
                 file.WriteLine("RememberMe-" + chkRememberMe.IsChecked.ToString());

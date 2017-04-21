@@ -15,15 +15,14 @@ namespace GUI.Scripts
 {
     public static class ManageData
     {
-        private const string CSTRING = @"Data Source=C:\Database\database.sqlite;Version=3;";
+        private const string CSTRING = @"Data Source=" + Utilities.LOCAL_DB_URL + ";Version=3;";
 
         public static void ProcessFile(string url)
         {
-            if (File.Exists(@"C:\Database\database.sqlite"))
-                File.Delete(@"C:\Database\database.sqlite");
+            if (File.Exists(Utilities.LOCAL_DB_URL))
+                File.Delete(Utilities.LOCAL_DB_URL);
             FarmIdentificationManagement fid = new FarmIdentificationManagement();
             ProcessData f = new ProcessData(url);
-            //ProcessData f = new ProcessData(@"C:\Users\2015001518\Downloads\Kounga Weekly Farm Report.xlsx");
             f.createSQLiteDB();
             fid.CreateFarmTable();
             fid.EstablishData("Kounga", "11/9/2001");
@@ -34,46 +33,133 @@ namespace GUI.Scripts
             f.processSheet("paddocks");
         }
 
-        public static List<WeeklyData> LoadData()
+        public static List<WeeklyData> WeeklyLoadData()
         {
             List<WeeklyData> list = new List<WeeklyData>();
             using (SQLiteConnection conn = new SQLiteConnection(CSTRING))
             {
-                string query = "select id,farmid,date,data from Datas";
+                string query = "select farmid,date,data from Datas";
                 conn.Open();
                 SQLiteCommand cmd = new SQLiteCommand(query, conn);
                 SQLiteDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    int id = reader.GetInt32(0);
-                    int farmid = reader.GetInt32(1);
-                    DateTime sdate = reader.GetDateTime(2);
-                    string data = reader.GetString(3);
-                    list.Add(new WeeklyData(id, farmid, sdate, data));
+                    int farmid = reader.GetInt32(0);
+                    DateTime sdate = reader.GetDateTime(1);
+                    string data = reader.GetString(2);
+                    list.Add(new WeeklyData(farmid, sdate, data));
                 }
                 conn.Close();
             }
             return list;
         }
 
-        public static void UploadDataGet(WeeklyData wdata)
+        public static List<Comments> CommentsLoadData()
         {
-            //http://swartkat.fossul.com/data/insertdata?farmid=42
-            string url = string.Format("http://swartkat.fossul.com/data/insertdata?farmid={0}&sdate={1}&data={2}", wdata.FarmID, wdata.Sdate.ToString("yyyy-MM-dd"), wdata.Data);
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-            request.Method = "GET";
-            String test = String.Empty;
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            List<Comments> list = new List<Comments>();
+            using (SQLiteConnection conn = new SQLiteConnection(CSTRING))
             {
-                Stream dataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(dataStream);
-                test = reader.ReadToEnd();
-                reader.Close();
-                dataStream.Close();
-                //MessageBox.Show(test + "\n");
-                //int result = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(test);
+                string query = "select farmid,sdate,category,description from Comments";
+                conn.Open();
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                SQLiteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int farmid = reader.GetInt32(0);
+                    DateTime sdate = reader.GetDateTime(1);
+                    string category = reader.GetString(2);
+                    string description = reader.GetString(3);
+                    list.Add(new Comments(farmid, sdate, category, description));
+                }
+                conn.Close();
             }
-            //DeserializeObject(test...)
+            return list;
+        }
+
+        public static List<FarmSupplements> FarmSuppLoadData()
+        {
+            List<FarmSupplements> list = new List<FarmSupplements>();
+            using (SQLiteConnection conn = new SQLiteConnection(CSTRING))
+            {
+                string query = "select farmid,sdate,cows,supplements from farmSupplements";
+                conn.Open();
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                SQLiteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int farmid = reader.GetInt32(0);
+                    string date = reader.GetString(1);
+                    DateTime sdate = DateTime.Parse(date);
+                    string cows = reader.GetString(2);
+                    string supp = reader.GetString(3);
+                    list.Add(new FarmSupplements(farmid, sdate, cows, supp));
+                }
+                conn.Close();
+            }
+            return list;
+        }
+
+        public static List<Calculations> CalcLoadData()
+        {
+            List<Calculations> list = new List<Calculations>();
+            using (SQLiteConnection conn = new SQLiteConnection(CSTRING))
+            {
+                string query = "select row,formula from Formulae";
+                conn.Open();
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                SQLiteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int row = reader.GetInt32(0);
+                    string formula = reader.GetString(1);
+                    list.Add(new Calculations(row, formula));
+                }
+                conn.Close();
+            }
+            return list;
+        }
+
+        public static List<Labels> LabelLoadData()
+        {
+            List<Labels> list = new List<Labels>();
+            using (SQLiteConnection conn = new SQLiteConnection(CSTRING))
+            {
+                string query = "select id,label from Labels";
+                conn.Open();
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                SQLiteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int row = reader.GetInt32(0);
+                    string label = reader.GetString(1);
+                    list.Add(new Labels(row, label));
+                }
+                conn.Close();
+            }
+            return list;
+        }
+
+        public static List<Paddocks> PaddocksLoadData()
+        {
+            List<Paddocks> list = new List<Paddocks>();
+            using (SQLiteConnection conn = new SQLiteConnection(CSTRING))
+            {
+                string query = "select farmid,sdate,paddockid,crop,paddock from farmSupplements";
+                conn.Open();
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                SQLiteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int farmid = reader.GetInt32(0);
+                    DateTime sdate = reader.GetDateTime(1);
+                    string paddockID = reader.GetString(2);
+                    string crop = reader.GetString(3);
+                    double size = reader.GetDouble(4);
+                    list.Add(new Paddocks(farmid, sdate, paddockID, crop, size));
+                }
+                conn.Close();
+            }
+            return list;
         }
     }
 }

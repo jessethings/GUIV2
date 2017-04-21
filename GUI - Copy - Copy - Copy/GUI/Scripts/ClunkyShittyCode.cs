@@ -13,23 +13,19 @@ namespace GUI.Scripts
             //rtbUploadMessages.FontStyle
             if (upst == UploadStatus.SelectFile)
             {
-                return "";
+                return "1. Select your Excel Workbook";
             }
             else if (upst == UploadStatus.GenerateLocal)
             {
-                return "";
-            }
-            else if (upst == UploadStatus.ReadLocal)
-            {
-                return "";
+                return "2. Process the Workbook";
             }
             else if (upst == UploadStatus.UploadLocal)
             {
-                return "";
+                return "3. Upload the data to the server";
             }
             else if (upst == UploadStatus.Complete)
             {
-                return "";
+                return "Complete!";
             }
             return "error";
         }

@@ -27,8 +27,17 @@ namespace GUI
     {
         string url;
         bool isProcessing;
+        string FarmName;
+        bool uploadIsComplete = false;
 
-        List<WeeklyData> currentData;
+        //turn into a factory
+        List<WeeklyData> weekly;
+        List<Comments> comments;
+        List<Paddocks> paddocks;
+        List<FarmSupplements> farmsupp;
+        //only need to be run once
+        List<Labels> labels;
+        List<Calculations> calculations;
 
         public Uploader()
         {
@@ -36,23 +45,31 @@ namespace GUI
             DisableEnableWindows(ActiveWindow.Home);
         }
 
+        public void SetFarmName(string name)
+        {
+            if (name == "" || name == null)
+                FarmName = "Not Found";
+            FarmName = name;
+            labFarmNameHome.Content = FarmName;
+            labFarmNameMenu.Content = FarmName;
+        }
+
         private void UpdateUploadStatus(UploadStatus upst)
         {
             butSelectFile.IsEnabled = true;
             butUploadMemoryData.IsEnabled = false;
-            butReadLocalDatabase.IsEnabled = false;
             butGenerateLocalDatabase.IsEnabled = false;
 
             if (upst == UploadStatus.Complete)
             {
 
             }
-            else if (upst == UploadStatus.ReadLocal)
-                butUploadMemoryData.IsEnabled = true;
             else if (upst == UploadStatus.GenerateLocal)
-                butReadLocalDatabase.IsEnabled = true;
+                butUploadMemoryData.IsEnabled = true;
             else if (upst == UploadStatus.SelectFile)
                 butGenerateLocalDatabase.IsEnabled = true;
+
+            labUploadInstruction.Content = ClunkyShittyCode.SetUploadPanelText(upst +1);
         }
 
         private void butClose_Click(object sender, RoutedEventArgs e)
@@ -76,7 +93,12 @@ namespace GUI
                 {
                     url = fd.FileName;
                     UpdateUploadStatus(UploadStatus.SelectFile);
-                    currentData = new List<WeeklyData>();
+                    weekly = new List<WeeklyData>();
+                    comments = new List<Comments>();
+                    paddocks = new List<Paddocks>();
+                    farmsupp = new List<FarmSupplements>();
+                    labels = new List<Labels>();
+                    calculations = new List<Calculations>();
                 }
                 else
                     UpdateUploadStatus(UploadStatus.None);
@@ -110,34 +132,47 @@ namespace GUI
             isProcessing = false;
         }
 
-        private void click_ReadLocalDatabase(object sender, RoutedEventArgs e)
-        {
-            currentData = ManageData.LoadData();
-            if (currentData.Count > 0 && !isProcessing)
-            {
-                isProcessing = true;
-                UpdateUploadStatus(UploadStatus.ReadLocal);
-            }
-            isProcessing = false;
-        }
-
         private void butUploadMemoryData_Click(object sender, RoutedEventArgs e)
         {
-            if (currentData != null && !isProcessing)
+            bool tmp = false;
+            if (weekly != null && !isProcessing)
             {
                 isProcessing = true;
-                bool tmp = false;
+                weekly = ManageData.WeeklyLoadData();
+                comments = ManageData.CommentsLoadData();
+                try { paddocks = ManageData.PaddocksLoadData(); } catch (Exception ie) { }
+                farmsupp = ManageData.FarmSuppLoadData();
+                labels = ManageData.LabelLoadData();
+                calculations = ManageData.CalcLoadData();
+
                 try
                 {
                     this.Cursor = Cursors.Wait;
                     //UploadData(new WeeklyData(1, 42, DateTime.Now, "HelloWorld"));
                     //UploadDataGet(new WeeklyData(1, 42, DateTime.Now, "HelloWorld"));
 
-                    foreach (WeeklyData wdata in currentData)
+                    foreach (WeeklyData wdata in weekly)
                     {
-                        ManageData.UploadDataGet(wdata);
+                        UploadData.UploadDataGet(wdata);
                     }
 
+                    this.Cursor = Cursors.Arrow;                    
+                }
+                catch (Exception ie)
+                {
+                    MessageBox.Show(ie.ToString());
+                    tmp = true;
+                }
+            }
+            if (farmsupp != null && !isProcessing)
+            {
+                try
+                {
+                    this.Cursor = Cursors.Wait;
+                    foreach (FarmSupplements fsdata in farmsupp)
+                    {
+                        UploadData.UploadFarmSuppGet(fsdata);
+                    }
                     this.Cursor = Cursors.Arrow;
                 }
                 catch (Exception ie)
@@ -145,15 +180,47 @@ namespace GUI
                     MessageBox.Show(ie.ToString());
                     tmp = true;
                 }
-                if (!tmp)
-                    UpdateUploadStatus(UploadStatus.UploadLocal);
+            }
+            if (paddocks != null && !isProcessing)
+            {
+                try
+                {
+                    this.Cursor = Cursors.Wait;
+                    foreach (Paddocks pdata in paddocks)
+                    {
+                        UploadData.UploadPaddocksGet(pdata);
+                    }
+                    this.Cursor = Cursors.Arrow;
+                }
+                catch (Exception ie)
+                {
+                    MessageBox.Show(ie.ToString());
+                    tmp = true;
+                }
+            }
+            if (paddocks != null && !isProcessing)
+            {
+                try
+                {
+                    this.Cursor = Cursors.Wait;
+                    foreach (Comments cdata in comments)
+                    {
+                        UploadData.UploadCommentsGet(cdata);
+                    }
+                    this.Cursor = Cursors.Arrow;
+                }
+                catch (Exception ie)
+                {
+                    MessageBox.Show(ie.ToString());
+                    tmp = true;
+                }
+            }
+            if (!tmp)
+            {
+                UpdateUploadStatus(UploadStatus.UploadLocal);
+                uploadIsComplete = true;
             }
             isProcessing = false;
-        }
-
-        private void button_Copy4_Click(object sender, RoutedEventArgs e)
-        {
-            //leave me here pls
         }
 
         private void panTitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -171,16 +238,22 @@ namespace GUI
 
         private void DisableEnableWindows(ActiveWindow aw)
         {
+            if (uploadIsComplete)
+            {
+                uploadIsComplete = false;
+                labUploadInstruction.Content = ClunkyShittyCode.SetUploadPanelText(UploadStatus.None);
+            }
+
             if (aw == ActiveWindow.Home)
             {
                 panHome.Visibility = Visibility.Visible;
-                panNews.Visibility = Visibility.Hidden;
+                panReport.Visibility = Visibility.Hidden;
                 panSettings.Visibility = Visibility.Hidden;
                 panUpload.Visibility = Visibility.Hidden;
             }
             else if (aw == ActiveWindow.Report)
             {
-                panNews.Visibility = Visibility.Visible;
+                panReport.Visibility = Visibility.Visible;
                 panHome.Visibility = Visibility.Hidden;
                 panSettings.Visibility = Visibility.Hidden;
                 panUpload.Visibility = Visibility.Hidden;
@@ -189,16 +262,24 @@ namespace GUI
             {
                 panUpload.Visibility = Visibility.Visible;
                 panHome.Visibility = Visibility.Hidden;
-                panNews.Visibility = Visibility.Hidden;
+                panReport.Visibility = Visibility.Hidden;
                 panSettings.Visibility = Visibility.Hidden;
             }
             else if (aw == ActiveWindow.Settings)
             {
                 panSettings.Visibility = Visibility.Visible;
                 panHome.Visibility = Visibility.Hidden;
-                panNews.Visibility = Visibility.Hidden;
+                panReport.Visibility = Visibility.Hidden;
                 panUpload.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void butMenuLogout_Click(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists(Utilities.SAVE_DATA_URL))
+                File.Delete(Utilities.SAVE_DATA_URL);
+            Application.Current.Shutdown();
+
         }
     }
 }

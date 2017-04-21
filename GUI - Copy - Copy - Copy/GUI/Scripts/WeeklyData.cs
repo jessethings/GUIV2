@@ -12,7 +12,7 @@ namespace GUI.Scripts
         public DateTime Sdate { get; set; }
         public string Data { get; set; }
 
-        public WeeklyData(int id, int farmid, DateTime sdate, string data)
+        public WeeklyData(int farmid, DateTime sdate, string data)
         {
             this.FarmID = farmid;
             this.Sdate = sdate;
@@ -28,7 +28,7 @@ namespace GUI.Scripts
         public string Crop { get; set; }
         public double Size { get; set; }
 
-        public Paddocks(int id, int farmid, DateTime sdate, string paddock, string crop, double size)
+        public Paddocks(int farmid, DateTime sdate, string paddock, string crop, double size)
         {
             this.FarmID = farmid;
             this.Sdate = sdate;
@@ -45,7 +45,7 @@ namespace GUI.Scripts
         public string Cows { get; set; }
         public string Supplements { get; set; }
 
-        public FarmSupplements(int id, int farmid, DateTime sdate, string cows, string supplements)
+        public FarmSupplements(int farmid, DateTime sdate, string cows, string supplements)
         {
             this.FarmID = farmid;
             this.Sdate = sdate;
@@ -86,7 +86,7 @@ namespace GUI.Scripts
     public class Calculations
     {
         //public int Id { get; set; }
-        public int Row { get; set; }   
+        public int Row { get; set; }
         public string Formula { get; set; }
 
         public Calculations(int row, string formula)
@@ -94,7 +94,7 @@ namespace GUI.Scripts
             //this.Id = id;
             this.Row = row;
             this.Formula = formula;
-            
+
         }
     }
 }

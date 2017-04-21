@@ -11,7 +11,6 @@ namespace GUI.Scripts
         None,
         SelectFile,
         GenerateLocal,
-        ReadLocal,
         UploadLocal,
         Complete
     }
@@ -22,5 +21,11 @@ namespace GUI.Scripts
         Upload = 2,
         Report = 3,
         Settings = 4
+    }
+
+    public static class Utilities
+    {
+        public const string SAVE_DATA_URL = @"save.tf";
+        public const string LOCAL_DB_URL = @"C:\Database\database.sqlite";
     }
 }
