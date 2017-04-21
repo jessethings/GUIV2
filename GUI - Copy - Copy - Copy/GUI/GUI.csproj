@@ -48,6 +48,10 @@
     <Reference Include="FortunaExcelProcessing">
       <HintPath>..\..\..\..\SWARTKATGUI-master\SWARTKATMAINAPP-master\FortunaExcelProcessing\bin\Debug\FortunaExcelProcessing.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -81,6 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Scripts\CheckForExistingColumn.cs" />
     <Compile Include="Scripts\ClunkyShittyCode.cs" />
     <Compile Include="Scripts\FileReader.cs" />
     <Compile Include="Scripts\LoginClass.cs" />
