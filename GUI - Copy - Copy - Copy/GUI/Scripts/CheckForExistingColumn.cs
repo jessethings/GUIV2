@@ -10,7 +10,8 @@ namespace GUI.Scripts
 {
     public static class CheckForExistingColumn
     {
-        //db variables
+        //done instead via website
+        /*db variables
         static string _server;
         static string _db;
         static string _uid;
@@ -21,9 +22,9 @@ namespace GUI.Scripts
         private static void establishConnection()
         {
             _server = "";
-            _db = "";
-            _uid = "";
-            _pw = "";
+            _db = "swartdb";
+            _uid = "swartdba";
+            _pw = "Heise@2017";
             string constring = $"SERVER={_server};DATABASE={_db};UID={_uid};PASSWORD={_pw};";
             connection = new MySqlConnection(constring);
         }
@@ -96,6 +97,7 @@ namespace GUI.Scripts
             }
             //cannot confirm or deny contents of table so return true
             return true;
+            */
         }
     }
 }
