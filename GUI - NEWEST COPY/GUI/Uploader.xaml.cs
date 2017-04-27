@@ -509,8 +509,11 @@ namespace GUI
 
         private void butGenerateConsolidatedReport_Click(object sender, RoutedEventArgs e)
         {
+            DateTime date = (DateTime)cboColsonidatedReportDate.SelectedValue;
+
             processConsolidated p = new processConsolidated();
-            p.createWorkBook("",(DateTime)cboColsonidatedReportDate.SelectedValue, Dictionary<int, string> dict);
+
+            p.createWorkBook("",date, dict);
         }
     }
 }

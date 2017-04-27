@@ -132,7 +132,7 @@
                 <TextBox x:Name="textBox" TextWrapping="Wrap" Text="TextBox" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Width="500" HorizontalAlignment="Left" Margin="30,-40,0,0"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="panReport" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsHidden="True" d:IsLocked="True">
+        <StackPanel x:Name="panReport" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top">
             <Image x:Name="imgHeader3" Height="350" Margin="0,25,0,0" VerticalAlignment="Top" Source="Images/fgl_banner_newsmedia.jpg" RenderTransformOrigin="0.5,0.5" Width="790" UseLayoutRounding="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="UniformToFill">
                 <Image.LayoutTransform>
                     <TransformGroup>
@@ -144,13 +144,13 @@
                 </Image.LayoutTransform>
             </Image>
             <StackPanel x:Name="ContentMainReport" Height="225" Background="#FF323232">
-                <ComboBox x:Name="cboColsonidatedReportDate" Width="200" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,26,30,0" Height="40" IsReadOnly="True"/>
-                <Button x:Name="butGenerateConsolidatedReport" Content="Generate Report" Width="200" Margin="0,26,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                <ComboBox x:Name="cboColsonidatedReportDate" Width="200" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,26,30,0" Height="40" IsReadOnly="True" SelectionChanged="cboColsonidatedReportDate_SelectionChanged"/>
+                <Button x:Name="butGenerateConsolidatedReport" Content="Generate Report" Width="200" Margin="0,26,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Right" Click="butGenerateConsolidatedReport_Click"/>
                 <Button x:Name="butOpenColsolidatedReport" Content="Open Report" Width="200" Margin="0,26,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="False"/>
                 <StackPanel x:Name="panMessage1" Height="175" Width="555" HorizontalAlignment="Left" Margin="0,-175,0,0"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="panUpload" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsLocked="True" d:IsHidden="True">
+        <StackPanel x:Name="panUpload" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsHidden="True" d:IsLocked="True">
             <Image x:Name="imgHeader1" Height="450" Margin="0,-75,0,0" VerticalAlignment="Top" Source="Images/fgl_banner_farm_patiki_160219_165631.jpg" RenderTransformOrigin="0.5,0.5" Width="790" UseLayoutRounding="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="UniformToFill">
                 <Image.LayoutTransform>
                     <TransformGroup>
@@ -176,7 +176,7 @@
             <Button x:Name="butClose" Content="X" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="24" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="15" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Cursor="Hand" BorderThickness="0" Click="butClose_Click"/>
             <Button x:Name="butMinimise" Content="__" HorizontalContentAlignment="Center" Width="24" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="15" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,-24,24,0" FontWeight="Bold" BorderThickness="0" Click="butMinimise_Click"/>
         </StackPanel>
-        <StackPanel x:Name="panMenu" Height="600" Width="209.7" HorizontalAlignment="Left" Background="White" Margin="0,-600,0,0" UseLayoutRounding="False">
+        <StackPanel x:Name="panMenu" Height="600" Width="209.7" HorizontalAlignment="Left" Background="White" Margin="0,-600,0,0" UseLayoutRounding="False" d:IsLocked="True">
             <StackPanel.Effect>
                 <DropShadowEffect ShadowDepth="1" Opacity="0.5" BlurRadius="1" Color="#FF323232"/>
             </StackPanel.Effect>

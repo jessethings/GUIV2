@@ -213,3 +213,9 @@ E:\tmp\GUI - Copy - Copy - Copy - Copy\GUI\bin\Debug\Newtonsoft.Json.xml
 D:\Users\Thrain\Documents\GitHub\GUIV2\GUI - NEWEST COPY\GUI\bin\Debug\GUI.exe.config
 D:\Users\Thrain\Documents\GitHub\GUIV2\GUI - NEWEST COPY\GUI\obj\Debug\GUI.exe
 D:\Users\Thrain\Documents\GitHub\GUIV2\GUI - NEWEST COPY\GUI\obj\Debug\GUI.pdb
+D:\Users\Thrain\Documents\GitHub\GUIV2\GUI - NEWEST COPY\GUI\obj\Debug\GUI.csprojResolveAssemblyReference.cache
+D:\Users\Thrain\Documents\GitHub\GUIV2\GUI - NEWEST COPY\GUI\obj\Debug\MainWindow.g.cs
+D:\Users\Thrain\Documents\GitHub\GUIV2\GUI - NEWEST COPY\GUI\obj\Debug\Uploader.g.cs
+D:\Users\Thrain\Documents\GitHub\GUIV2\GUI - NEWEST COPY\GUI\obj\Debug\App.g.cs
+D:\Users\Thrain\Documents\GitHub\GUIV2\GUI - NEWEST COPY\GUI\obj\Debug\GUI_MarkupCompile.cache
+D:\Users\Thrain\Documents\GitHub\GUIV2\GUI - NEWEST COPY\GUI\obj\Debug\GUI_MarkupCompile.lref
