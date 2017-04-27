@@ -25,7 +25,9 @@ namespace GUI.Scripts
             ProcessData f = new ProcessData(url);
             f.createSQLiteDB();
             fid.CreateFarmTable();
-            fid.EstablishData("Kounga", "11/9/2001");
+            fid.EditTable("Kounga", 1.3);
+            fid.EditTable("Jayvor", 2);
+            fid.EditTable("Miraka", 4588);
             f.CreateWorkBook();
             f.processSheet("Input Page");
             f.processSheet("Weekly Comments");
