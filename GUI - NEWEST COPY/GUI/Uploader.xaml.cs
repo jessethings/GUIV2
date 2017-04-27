@@ -18,6 +18,7 @@ using System.Data.SQLite;
 using FortunaExcelProcessing;
 using GUI.Scripts;
 using Newtonsoft.Json;
+using FortunaExcelProcessing.ConsilidatedReport;
 
 namespace GUI
 {
@@ -47,6 +48,16 @@ namespace GUI
         {
             InitializeComponent();
             DisableEnableWindows(ActiveWindow.Home);
+
+
+            //thingy to make combo thingy thingy
+            DateTime date = new DateTime(2017, 06, 1);
+            for (int i = 1; i <= 365; i++)
+            {
+                cboColsonidatedReportDate.Items.Add(date);
+                date.AddDays(7);
+            }
+
         }
 
         public void SetFarm(Farm farm)
@@ -489,6 +500,17 @@ namespace GUI
 
             panModifyFarm.Visibility = Visibility.Visible;
             ContentMainAdmin.Visibility = Visibility.Hidden;
+        }
+
+        private void cboColsonidatedReportDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //ignore dis
+        }
+
+        private void butGenerateConsolidatedReport_Click(object sender, RoutedEventArgs e)
+        {
+            processConsolidated p = new processConsolidated();
+            p.createWorkBook("",(DateTime)cboColsonidatedReportDate.SelectedValue, Dictionary<int, string> dict);
         }
     }
 }

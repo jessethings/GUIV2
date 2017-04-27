@@ -42,5 +42,15 @@ namespace GUI.Scripts
             f.role = int.Parse(tmp2[3]);
             return f;
         }
+
+        public static Dictionary<int,string> GetWeeklyFarmData(string date)
+        {
+            string tmp = DownloadData.ReceiveResponse(string.Format("http://swartkat.fossul.com/gui/getdata?fulldate={0}", date));
+            //return JsonConvert.DeserializeObject<List<FullFarm>>(tmp);
+            Dictionary<int, string> dict = JsonConvert.DeserializeObject<Dictionary<int, string>>(tmp);
+            return dict;
+        }
+
+
     }
 }

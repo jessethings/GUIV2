@@ -923,9 +923,21 @@ namespace GUI {
             return;
             case 51:
             this.cboColsonidatedReportDate = ((System.Windows.Controls.ComboBox)(target));
+            
+            #line 147 "..\..\Uploader.xaml"
+            this.cboColsonidatedReportDate.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.cboColsonidatedReportDate_SelectionChanged);
+            
+            #line default
+            #line hidden
             return;
             case 52:
             this.butGenerateConsolidatedReport = ((System.Windows.Controls.Button)(target));
+            
+            #line 148 "..\..\Uploader.xaml"
+            this.butGenerateConsolidatedReport.Click += new System.Windows.RoutedEventHandler(this.butGenerateConsolidatedReport_Click);
+            
+            #line default
+            #line hidden
             return;
             case 53:
             this.butOpenColsolidatedReport = ((System.Windows.Controls.Button)(target));
