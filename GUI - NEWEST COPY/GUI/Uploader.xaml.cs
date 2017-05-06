@@ -512,6 +512,7 @@ namespace GUI
             DateTime date = (DateTime)cboColsonidatedReportDate.SelectedValue;
 
             processConsolidated p = new processConsolidated();
+            Dictionary<int, string> dict = DownloadData.GetWeeklyFarmData(date.ToString());
 
             p.createWorkBook("",date, dict);
         }
