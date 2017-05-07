@@ -53,6 +53,10 @@
                 <Trigger Property="IsPressed" Value="True">
                     <Setter Property="Background" Value="#FFC8C8C8" />
                 </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="BorderBrush" Value="#FF6A6A6A"/>
+                    <Setter Property="Background" Value="#FF6A6A6A"/>
+                </Trigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="RoundCornerTransparentWithBorder" TargetType="{x:Type Button}">

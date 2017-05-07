@@ -196,7 +196,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="butMenuUpload" Content="Upload Workbook" Tag="2" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3">
+            <Button x:Name="butMenuUpload" Content="Upload Workbook" Tag="2" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" IsEnabled="False">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -206,7 +206,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="butMenuDownload" Content="Download Report" Tag="3" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3">
+            <Button x:Name="butMenuDownload" Content="Download Report" Tag="3" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" IsEnabled="False">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -216,7 +216,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="butMenuAdmin" Content="Admin" Tag="5" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3">
+            <Button x:Name="butMenuAdmin" Content="Admin" Tag="5" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" IsEnabled="False">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -226,7 +226,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="butMenuSettings" Content="Settings" Tag="4" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3">
+            <Button x:Name="butMenuSettings" Content="Settings" Tag="4" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" IsEnabled="False">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" ScaleX="1"/>

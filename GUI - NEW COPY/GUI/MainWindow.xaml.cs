@@ -71,14 +71,28 @@ namespace GUI
             if (chkRememberMe.IsChecked == true)
                 SaveData();
             Uploader u = new Uploader();
+            Farm f = new Farm();
+            f = DownloadData.GetUserFarm(txtUsername.Text);
+            MessageBox.Show("1");
+            u.SetRole((PermissionLevel)f.role);
+            MessageBox.Show("3");
+            u.SetFarm(f);
+            MessageBox.Show("2");
             try
             {
-                u.SetFarm(DownloadData.GetUserFarm(txtUsername.Text));
+                /*Farm f = new Farm();
+                f = DownloadData.GetUserFarm(txtUsername.Text);
+                MessageBox.Show("1");
+                u.SetRole((PermissionLevel)f.role);
+                MessageBox.Show("3");
+                u.SetFarm(f);
+                MessageBox.Show("2");*/
             }
             catch
             {
                 MessageBox.Show("An error occured when attempting to load your farm details.");
             }
+            u.SetupPermissions();
             this.Close();
             u.ShowDialog();           
         }

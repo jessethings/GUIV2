@@ -20,54 +20,61 @@ namespace GUI.Scripts
         public static string ProcessFile(string url, Farm myfarm)
         {
             string retunString = "";
-            if (File.Exists(Utilities.LOCAL_DB_URL))
-                File.Delete(Utilities.LOCAL_DB_URL);
-            FarmIdentificationManagement fid = new FarmIdentificationManagement();
-            ProcessData f = new ProcessData(url);
-            f.createSQLiteDB();
-            fid.CreateFarmTable();
-            fid.EditTable(myfarm.farmid, myfarm.farmname, myfarm.area);
-            f.CreateWorkBook();
+            try
+            {
+                if (File.Exists(Utilities.LOCAL_DB_URL))
+                    File.Delete(Utilities.LOCAL_DB_URL);
+                FarmIdentificationManagement fid = new FarmIdentificationManagement();
+                ProcessData f = new ProcessData(url);
+                f.createSQLiteDB();
+                fid.CreateFarmTable();
+                fid.EditTable(myfarm.farmid, myfarm.farmname, myfarm.area);
+                f.CreateWorkBook();
 
-            f.processSheet("Input Page");
-            f.processSheet("Weekly Comments");
-            f.processSheet("Weekly Data");
-            f.processSheet("paddocks");
+                f.processSheet("Input Page");
+                f.processSheet("Weekly Comments");
+                f.processSheet("Weekly Data");
+                f.processSheet("paddocks");
 
-            //try
-            //{
-            //    f.processSheet("Input Page");
-            //}
-            //catch
-            //{
-            //    retunString += "An 'Input Page' page was not found." + Environment.NewLine;
-            //}
-            //try
-            //{
-            //    f.processSheet("Weekly Comments");
-            //}
-            //catch
-            //{
-            //    retunString += "A 'Comments' page was not found." + Environment.NewLine;
-            //}
-            //try
-            //{
-            //    f.processSheet("Weekly Data");
-            //}
-            //catch
-            //{
-            //    retunString += "A 'Weekly Data' page was not found." + Environment.NewLine;
-            //}
-            //try
-            //{
-            //    f.processSheet("paddocks");
-            //}
-            //catch
-            //{ 
-            //    retunString += "A 'Paddocks' page was not found." + Environment.NewLine;
-            //}
+                //try
+                //{
+                //    f.processSheet("Input Page");
+                //}
+                //catch
+                //{
+                //    retunString += "An 'Input Page' page was not found." + Environment.NewLine;
+                //}
+                //try
+                //{
+                //    f.processSheet("Weekly Comments");
+                //}
+                //catch
+                //{
+                //    retunString += "A 'Comments' page was not found." + Environment.NewLine;
+                //}
+                //try
+                //{
+                //    f.processSheet("Weekly Data");
+                //}
+                //catch
+                //{
+                //    retunString += "A 'Weekly Data' page was not found." + Environment.NewLine;
+                //}
+                //try
+                //{
+                //    f.processSheet("paddocks");
+                //}
+                //catch
+                //{ 
+                //    retunString += "A 'Paddocks' page was not found." + Environment.NewLine;
+                //}
 
-            return retunString;
+                return retunString;
+            }
+            catch
+            {
+                return "The database is currently open, please close the application that has it open.";
+            }
         }
 
         public static List<WeeklyData> WeeklyLoadData()

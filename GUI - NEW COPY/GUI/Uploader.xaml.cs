@@ -29,11 +29,8 @@ namespace GUI
     {
         string url;
         bool isProcessing;
-        string UserEmail;
-        Farm farm;
+        Farm myFarm;
         bool uploadIsComplete = false;
-
-        Dictionary<string, int> farms;
 
         //turn into a factory
         List<WeeklyData> weekly;
@@ -49,19 +46,52 @@ namespace GUI
             InitializeComponent();
             DisableEnableWindows(ActiveWindow.Home);
 
-            DateTime date = new DateTime(2017, 06, 1);
+            DateTime date = new DateTime(2016, 06, 6);
             for (int i = 1; i <= 52; i++)
             {
-                cboColsonidatedReportDate.Items.Add(date);
+                cboColsonidatedReportDate.Items.Add(date.ToString("yyyy-MM-dd"));
                 date = date.AddDays(7);
             }
         }
 
         public void SetFarm(Farm farm)
         {
-            this.farm = farm;
+            this.myFarm = farm;
             labFarmNameMenu.Content = farm.farmname;
             labFarmNameHome.Content = farm.farmname;
+        }
+
+        public void SetRole(PermissionLevel role)
+        {
+            myFarm = new Farm();
+            myFarm.role = (int)role;
+            SetupPermissions();
+        }
+
+        public void SetupPermissions()
+        {
+            if (myFarm == null)
+            {
+                myFarm.farmname = "No Farm Assigned";
+                myFarm.area = 0;
+                myFarm.farmid = 0;
+            }
+
+            if (myFarm.role == (int)PermissionLevel.User)
+            {
+                butMenuSettings.IsEnabled = true;
+                butMenuUpload.IsEnabled = true;
+                butMenuDownload.IsEnabled = true;
+            }
+            else if (myFarm.role == (int)PermissionLevel.Admin)
+            {
+                butMenuAdmin.IsEnabled = true;
+                butMenuSettings.IsEnabled = true;
+                butMenuUpload.IsEnabled = true;
+                butMenuDownload.IsEnabled = true;
+            }
+
+            
         }
 
         private void UpdateUploadStatus(UploadStatus upst)
@@ -126,18 +156,12 @@ namespace GUI
                 isProcessing = true;
                 bool tmp = false;
 
-                if (farm != null)
+                if (myFarm != null)
                 {
-                    //try
-                    //{
-                        ManageData.ProcessFile(url, farm);
-                    /*}
-                    catch (Exception ie)
-                    {
-                        //MessageBox.Show(ie.ToString());
-                        MessageBox.Show("If the excel workbook you are currently trying to upload is open, please close it before proceeding.\nIf it is already closed, please contact your local administrator and report this error.\nError: Fortuna#293");
-                        tmp = true;
-                    }*/
+                    string res = ManageData.ProcessFile(url, myFarm);
+                    if (res != "" && res != null)
+                        MessageBox.Show(res);
+
                     if (!tmp)
                         UpdateUploadStatus(UploadStatus.GenerateLocal);
                 }
@@ -500,12 +524,30 @@ namespace GUI
 
         private void butGenerateConsolidatedReport_Click(object sender, RoutedEventArgs e)
         {
-            DateTime date = (DateTime)cboColsonidatedReportDate.SelectedValue;
-            Dictionary<int, string> dict = DownloadData.GetWeeklyFarmData(date.ToString());
+            string date = cboColsonidatedReportDate.SelectedValue.ToString();
+            Dictionary<string, string> dict = DownloadData.GetWeeklyFarmData(date);
 
             processConsolidated p = new processConsolidated();
-
-            p.createWorkBook(@"C:\Reports\ConsolidatedReport.xlsx", date, dict);
+            if (File.Exists(Utilities.LOCAL_REPORT_URL))
+            {
+                try
+                {
+                    File.Delete(Utilities.LOCAL_REPORT_URL);
+                    try
+                    {
+                        //p.createWorkBook(Utilities.LOCAL_REPORT_URL, DateTime.Parse(date), dict);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Something went wrong, please contact your system administrator." + Environment.NewLine + "Errorcode: Fortuna#197");
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("The previous report is currently open in another application. Please close the application that is using this file.");
+                }
+            }
+            
         }
     }
 }
