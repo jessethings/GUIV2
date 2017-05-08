@@ -437,13 +437,17 @@ namespace GUI
                 if (txtModuserPassword.Password != "" && txtModuserName.Text != "" && txtModuserEmail.Text != "")//ensure there is no empty data being uploaded
                 {
                     if (txtModuserID.Text == "" || txtModuserID.Text == null)//is the user being created or modified? this textfield is read only so this dictates which of the two it is
+                    {
                         UploadData.CreateUser(u);                   //attempt to create a new user
+                        MessageBox.Show("User Created");
+                    }
                     else
                     {
                         UploadData.UpdateUser(u2.email, u);         //attempt to modify an existing user
                         try
                         {
                             UploadData.AssignFarm(cboModuserfarmlist.SelectedIndex, u2.email);//update the farm assigned to this user
+                            MessageBox.Show("Complete");
                         }
                         catch
                         {

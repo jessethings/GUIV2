@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Uploader" Height="600" Width="1000" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Icon="Images/favicon.ico" Background="#FFF0F0F0">
     <StackPanel Width="1000" Height="600">
-        <StackPanel x:Name="panHome" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,0,0,0" VerticalAlignment="Top" IsEnabled="False" d:IsHidden="True" d:IsLocked="True">
+        <StackPanel x:Name="panHome" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,0,0,0" VerticalAlignment="Top" IsEnabled="False" d:IsLocked="True">
             <Image x:Name="imgHeader" Height="602" Margin="0" VerticalAlignment="Top" Source="Images/fgl_banner_contactus.jpg" RenderTransformOrigin="0.5,0.5" Width="790" Stretch="UniformToFill" StretchDirection="DownOnly" UseLayoutRounding="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" Opacity="0.25">
                 <Image.LayoutTransform>
                     <TransformGroup>
@@ -24,7 +24,7 @@
                 <Label x:Name="labFarmNameHome" Content="Farm name" Foreground="White" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="32" Margin="0" HorizontalAlignment="Left" Cursor="" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="400"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="panUsers" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top">
+        <StackPanel x:Name="panUsers" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsLocked="True" d:IsHidden="True">
             <StackPanel x:Name="ContentMainAdmin" Height="575" Background="#FF323232" Margin="0,25,0,0">
                 <ListView x:Name="lstUsers" Height="240" Width="500" HorizontalAlignment="Left" Margin="31,30,0,0" RenderTransformOrigin="0.5,0.5" Cursor="Arrow">
                     <ListView.RenderTransform>

@@ -143,7 +143,11 @@ namespace GUI
                 {
                     if (txtRegPass.Password == txtRegPassConfirm.Password && !(txtRegPass.Password.Contains(" ")) && !(txtRegPass.Password.Contains("&")) && !(txtRegPass.Password.Contains("=")))
                     {
-
+                        User u = new User();
+                        u.email = txtRegEmail.Text;
+                        u.name = txtRegName.Text;
+                        u.password = txtRegPass.Password;
+                        UploadData.CreateUser(u);
                     }
                     else
                         MessageBox.Show("You have used invalid characters as your password" + Environment.NewLine + @"Account passwords are not allowed the characters ' ', '&', '='");
