@@ -539,10 +539,10 @@ namespace GUI
                 }
             }
             DateTime dt = DateTime.Parse(date);
-            p.createWorkBook(Utilities.LOCAL_REPORT_URL, date, dict);
             try
             {
-                
+                MessageBox.Show(dict.Count + "");
+                p.createWorkBook(Utilities.LOCAL_REPORT_URL, date, dict);
             }
             catch
             {
