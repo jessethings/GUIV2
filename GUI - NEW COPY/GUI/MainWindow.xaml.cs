@@ -28,6 +28,7 @@ namespace GUI
             InitializeComponent();
             LoadData();
             AttemptLogin(true);
+            panRegister.Visibility = Visibility.Hidden;
         }
 
         private void LoadData()
@@ -119,6 +120,39 @@ namespace GUI
         private void butLogin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             AttemptLogin();
+        }
+
+        private void butOpenRegisterMenu_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            panLogin.Visibility = Visibility.Hidden;
+            panRegister.Visibility = Visibility.Visible;
+        }
+
+        private void butSwitchBackToLogin_Click(object sender, RoutedEventArgs e)
+        {
+            panLogin.Visibility = Visibility.Visible;
+            panRegister.Visibility = Visibility.Hidden;
+        }
+
+        private void butRegister_Click(object sender, RoutedEventArgs e)
+        {
+            //register
+            if (txtRegEmail.Text.Length > 5 && txtRegEmail.Text.Contains('@') && txtRegEmail.Text.Contains(".") && !(txtRegEmail.Text.Contains(" ")) && !(txtRegEmail.Text.Contains("&")) && !(txtRegEmail.Text.Contains("="))) //must be longer than 5 characters due to the minimum characters in an email is 5, block out standard characters which may break upload
+            {
+                if (txtRegName.Text.Length > 3 && !(txtRegName.Text.Contains(" ")) && !(txtRegName.Text.Contains("&")) && !(txtRegName.Text.Contains("=")))//have a suitable name > 3 characters
+                {
+                    if (txtRegPass.Password == txtRegPassConfirm.Password && !(txtRegPass.Password.Contains(" ")) && !(txtRegPass.Password.Contains("&")) && !(txtRegPass.Password.Contains("=")))
+                    {
+
+                    }
+                    else
+                        MessageBox.Show("You have used invalid characters as your password" + Environment.NewLine + @"Account passwords are not allowed the characters ' ', '&', '='");
+                }
+                else
+                    MessageBox.Show("You have used invalid characters as your account name, or the name you entered is less than 4 characters in length" + Environment.NewLine + @"Account names are not allowed the characters ' ', '&', '='");
+            }
+            else
+                MessageBox.Show("You have used invalid characters as your email, or have an invalid email address" + Environment.NewLine + @"Account email is not allowed the characters ' ', '&', '='");
         }
     }
 }

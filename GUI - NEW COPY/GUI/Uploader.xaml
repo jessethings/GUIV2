@@ -24,7 +24,7 @@
                 <Label x:Name="labFarmNameHome" Content="Farm name" Foreground="White" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="32" Margin="0" HorizontalAlignment="Left" Cursor="" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="400"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="panUsers" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsHidden="True">
+        <StackPanel x:Name="panUsers" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top">
             <StackPanel x:Name="ContentMainAdmin" Height="575" Background="#FF323232" Margin="0,25,0,0">
                 <ListView x:Name="lstUsers" Height="240" Width="500" HorizontalAlignment="Left" Margin="31,30,0,0" RenderTransformOrigin="0.5,0.5" Cursor="Arrow">
                     <ListView.RenderTransform>
@@ -66,7 +66,7 @@
                 <Button x:Name="butModuserCreateUser" Content="Create User" Width="200" Margin="0,-460,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Right" Click="butModuserCreateUser_Click"/>
                 <Button x:Name="butModifyCreatefarm" Content="Create Farm" Width="200" Margin="0,-240,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Right" Click="butModifyUser_Click_1"/>
             </StackPanel>
-            <StackPanel x:Name="panModifyUser" Height="575" Background="#FF323232" Margin="0,-575,0,0">
+            <StackPanel x:Name="panModifyUser" Height="575" Background="#FF323232" Margin="0,-575,0,0" d:IsLocked="True">
                 <TextBox x:Name="txtModuserID" TextWrapping="Wrap" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Width="300" Margin="0,250,250,0" HorizontalAlignment="Right" Height="37" Tag="" ToolTip="The user's unique ID" Cursor="IBeam" IsEnabled="False"/>
                 <TextBox x:Name="txtModuserName" TextWrapping="Wrap" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Width="300" Margin="0,5,250,0" HorizontalAlignment="Right" Height="37" Tag="" ToolTip="Enter the name of the user" Cursor="IBeam"/>
                 <TextBox x:Name="txtModuserEmail" TextWrapping="Wrap" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Width="300" Margin="0,5,250,0" HorizontalAlignment="Right" Height="37" Tag="" ToolTip="Enter the user's email address" Cursor="IBeam"/>
@@ -132,7 +132,7 @@
                 <TextBox x:Name="textBox" TextWrapping="Wrap" Text="TextBox" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Width="500" HorizontalAlignment="Left" Margin="30,-40,0,0"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="panReport" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsHidden="True">
+        <StackPanel x:Name="panReport" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsLocked="True" d:IsHidden="True">
             <Image x:Name="imgHeader3" Height="350" Margin="0,25,0,0" VerticalAlignment="Top" Source="Images/fgl_banner_newsmedia.jpg" RenderTransformOrigin="0.5,0.5" Width="790" UseLayoutRounding="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="UniformToFill">
                 <Image.LayoutTransform>
                     <TransformGroup>
@@ -144,13 +144,19 @@
                 </Image.LayoutTransform>
             </Image>
             <StackPanel x:Name="ContentMainReport" Height="225" Background="#FF323232">
-                <ComboBox x:Name="cboColsonidatedReportDate" Width="200" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,26,30,0" Height="40" IsReadOnly="True" FontSize="20" FontFamily="/GUI;component/Fonts/#Open Sans"/>
-                <Button x:Name="butGenerateConsolidatedReport" Content="Generate Report" Width="200" Margin="0,26,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Right" Click="butGenerateConsolidatedReport_Click"/>
-                <Button x:Name="butOpenColsolidatedReport" Content="Open Report" Width="200" Margin="0,26,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="False"/>
+                <ComboBox x:Name="cboColsonidatedReportDate" Width="200" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,26,30,0" Height="40" IsReadOnly="True" FontSize="20" FontFamily="/GUI;component/Fonts/#Open Sans" ToolTip="Click me to find the date you're looking for"/>
+                <Button x:Name="butGenerateConsolidatedReport" Content="Generate Report" Width="200" Margin="0,26,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Right" Click="butGenerateConsolidatedReport_Click" ToolTip="Click me to generate a consolidated report for the date selected"/>
+                <Button x:Name="butOpenColsolidatedReport" Content="Open Report" Width="200" Margin="0,26,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="False" ToolTip="Click me to open the location of the consolidated report"/>
                 <StackPanel x:Name="panMessage1" Height="175" Width="555" HorizontalAlignment="Left" Margin="0,-175,0,0"/>
+                <StackPanel x:Name="panMessage_Copy" Height="175" Width="555" HorizontalAlignment="Left" Margin="0,-175,0,0">
+                    <Label x:Name="labAsSimple1" Content="First, select the" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="48" Background="#00000000" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,0" BorderThickness="20,0,0,0" Cursor="F"/>
+                    <Label x:Name="lab1" Content="date" FontFamily="/GUI;component/Fonts/#Roboto Thin" FontSize="55" Background="{x:Null}" Foreground="#FF00A3E5" HorizontalAlignment="Left" Margin="365,-75,0,0"/>
+                    <Label x:Name="labAsSimple1_Copy" Content="Second, click" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="48" Background="#00000000" Foreground="White" HorizontalAlignment="Left" Margin="0" BorderThickness="20,0,0,0" Cursor="F"/>
+                    <Label x:Name="lab1_Copy" Content="generate" FontFamily="/GUI;component/Fonts/#Roboto Thin" FontSize="55" Background="{x:Null}" Foreground="#FF00A3E5" HorizontalAlignment="Left" Margin="320,-76,0,0"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="panUpload" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top">
+        <StackPanel x:Name="panUpload" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsLocked="True" d:IsHidden="True">
             <Image x:Name="imgHeader1" Height="450" Margin="0,-75,0,0" VerticalAlignment="Top" Source="Images/fgl_banner_farm_patiki_160219_165631.jpg" RenderTransformOrigin="0.5,0.5" Width="790" UseLayoutRounding="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="UniformToFill">
                 <Image.LayoutTransform>
                     <TransformGroup>
@@ -162,9 +168,9 @@
                 </Image.LayoutTransform>
             </Image>
             <StackPanel x:Name="ContentMainUpload" Height="225" Background="#FF323232">
-                <Button x:Name="butSelectFile" Content="Select File" Width="200" Margin="0,26,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" Click="click_SelectInputFile" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-                <Button x:Name="butGenerateLocalDatabase" Content="Process Data" Width="200" Margin="0,26,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" Click="click_GenerateLocalDatabase" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="False"/>
-                <Button x:Name="butUploadMemoryData" Content="Upload to Server" Width="200" Margin="0,26,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" Click="butUploadMemoryData_Click" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="False"/>
+                <Button x:Name="butSelectFile" Content="Select File" Width="200" Margin="0,26,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" Click="click_SelectInputFile" VerticalAlignment="Top" HorizontalAlignment="Right" ToolTip="Click me to navigate to your raw excel workbook data"/>
+                <Button x:Name="butGenerateLocalDatabase" Content="Process Data" Width="200" Margin="0,26,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" Click="click_GenerateLocalDatabase" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="False" ToolTip="Click me to process the report and store a temporary file with all the data"/>
+                <Button x:Name="butUploadMemoryData" Content="Upload to Server" Width="200" Margin="0,26,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" Click="butUploadMemoryData_Click" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="False" ToolTip="Click me to send the temporary file to the server, be careful though, I may take a while"/>
                 <StackPanel x:Name="panMessage" Height="175" Width="555" HorizontalAlignment="Left" Margin="0,-175,0,0">
                     <Label x:Name="labAsSimple" Content="As simple as" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="48" Background="#00000000" Foreground="White" HorizontalAlignment="Left" Margin="0,10,0,0" BorderThickness="20,0,0,0"/>
                     <Label x:Name="lab123" Content="1 2 3" FontFamily="/GUI;component/Fonts/#Roboto Thin" FontSize="70" Background="{x:Null}" Foreground="#FF00A3E5" HorizontalAlignment="Left" Margin="310,-83,0,0"/>
@@ -176,7 +182,7 @@
             <Button x:Name="butClose" Content="X" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="24" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="15" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Cursor="Hand" BorderThickness="0" Click="butClose_Click"/>
             <Button x:Name="butMinimise" Content="__" HorizontalContentAlignment="Center" Width="24" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="15" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,-24,24,0" FontWeight="Bold" BorderThickness="0" Click="butMinimise_Click"/>
         </StackPanel>
-        <StackPanel x:Name="panMenu" Height="600" Width="209.7" HorizontalAlignment="Left" Background="White" Margin="0,-600,0,0" UseLayoutRounding="False">
+        <StackPanel x:Name="panMenu" Height="600" Width="209.7" HorizontalAlignment="Left" Background="White" Margin="0,-600,0,0" UseLayoutRounding="False" d:IsLocked="True">
             <StackPanel.Effect>
                 <DropShadowEffect ShadowDepth="1" Opacity="0.5" BlurRadius="1" Color="#FF323232"/>
             </StackPanel.Effect>
@@ -186,7 +192,7 @@
                 </Image.OpacityMask>
             </Image>
             <Label x:Name="labFarmNameMenu" Content="farm" Margin="5,0,-790,0" Width="200" HorizontalAlignment="Left" ToolTip="Your Farm" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Foreground="#FF00A3E5" Background="{x:Null}" BorderThickness="0,5,0,0"/>
-            <Button x:Name="butMenuHome" Content="Home" Click="SwitchWindows" Tag="1" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" Margin="0,20,0,0" Width="210" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3">
+            <Button x:Name="butMenuHome" Content="Home" Click="SwitchWindows" Tag="1" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" Margin="0,20,0,0" Width="210" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" ToolTip="Take me to the starting page">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -196,7 +202,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="butMenuUpload" Content="Upload Workbook" Tag="2" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" IsEnabled="False">
+            <Button x:Name="butMenuUpload" Content="Upload Workbook" Tag="2" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" IsEnabled="False" ToolTip="I would like to upload the latest data">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -206,7 +212,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="butMenuDownload" Content="Download Report" Tag="3" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" IsEnabled="False">
+            <Button x:Name="butMenuDownload" Content="Download Report" Tag="3" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" IsEnabled="False" ToolTip="I would like to download a consolidated report">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -216,7 +222,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="butMenuAdmin" Content="Admin" Tag="5" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" IsEnabled="False">
+            <Button x:Name="butMenuAdmin" Content="Admin" Tag="5" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" IsEnabled="False" ToolTip="I want to modify users and/or farms">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -226,7 +232,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="butMenuSettings" Content="Settings" Tag="4" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" IsEnabled="False">
+            <Button x:Name="butMenuSettings" Content="Settings" Tag="4" Click="SwitchWindows" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" IsEnabled="False" ToolTip="I would like to tweek some minor settings with this application">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -236,7 +242,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="butMenuWebsite" Content="Website" Tag="5" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3">
+            <Button x:Name="butMenuWebsite" Content="Website" Tag="5" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,2,0,0" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" ToolTip="Take me to the main website">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -246,7 +252,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="butMenuLogout" Content="Logout" Tag="5" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,20,0,0" Click="butMenuLogout_Click" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3">
+            <Button x:Name="butMenuLogout" Content="Logout" Tag="5" Style="{DynamicResource MenuButtons}" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Cursor="Hand" BorderThickness="0,20,0,0" Click="butMenuLogout_Click" Width="210" RenderTransformOrigin="0.5,0.5" Margin="0,0,-0.5,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10,3" ToolTip="I would like to log out and close the application">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" ScaleX="1"/>
