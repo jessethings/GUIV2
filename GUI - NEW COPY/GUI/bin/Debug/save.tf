@@ -1,3 +1,3 @@
 RememberMe-True
-Username-admin@miraka.com
-Password-Miraka
+Username-admin@kounga.com
+Password-Kounga

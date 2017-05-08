@@ -214,16 +214,13 @@ namespace GUI
                     this.Cursor = Cursors.Wait;
                     foreach (FarmSupplements fsdata in farmsupp)
                     {
-                        MessageBox.Show(fsdata.Sdate.ToString());
-                        File.WriteAllText("debugggggg", string.Format("http://swartkat.fossul.com/data/insertfarmsupplements?farmid={0}&sdate={1}&cows={2}&supplements={3}", fsdata.FarmID, fsdata.Sdate, fsdata.Cows, fsdata.Supplements));
                         UploadData.UploadFarmSuppGet(fsdata);
                     }
                     this.Cursor = Cursors.Arrow;
                 }
                 catch (Exception ie)
                 {
-                    //
-                    MessageBox.Show("Farm supp ### " + ie.ToString());
+                    MessageBox.Show(ie.ToString());
                     tmp = true;
                 }
             }
@@ -542,7 +539,6 @@ namespace GUI
                 }
             }
             DateTime dt = DateTime.Parse(date);
-            MessageBox.Show(string.Format("DateTime (dt): {0}\nString (date): {1}",dt.ToString(),date));
             p.createWorkBook(Utilities.LOCAL_REPORT_URL, date, dict);
             try
             {

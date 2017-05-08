@@ -283,3 +283,4 @@ C:\github\GUIV2\GUI - NEW COPY\GUI\obj\Debug\GUI.Properties.Resources.resources
 C:\github\GUIV2\GUI - NEW COPY\GUI\obj\Debug\GUI.csproj.GenerateResource.Cache
 C:\github\GUIV2\GUI - NEW COPY\GUI\bin\Debug\FortunaExcelProcessing.dll
 C:\github\GUIV2\GUI - NEW COPY\GUI\bin\Debug\FortunaExcelProcessing.xml
+F:\programs\github\GUIV2\GUI - NEW COPY\GUI\bin\Debug\FortunaExcelProcessing.xml
