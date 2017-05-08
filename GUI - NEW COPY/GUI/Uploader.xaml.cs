@@ -22,14 +22,15 @@ using FortunaExcelProcessing.ConsilidatedReport;
 
 namespace GUI
 {
-    /// <summary>
-    /// Interaction logic for Uploader.xaml
-    /// </summary>
+    // <summary>
+    // Interaction logic for Uploader.xaml
+    // </summary>
     public partial class Uploader : Window
     {
         string url;
         bool isProcessing;
         Farm myFarm;
+        PermissionLevel myRole;
         bool uploadIsComplete = false;
 
         //turn into a factory
@@ -64,34 +65,32 @@ namespace GUI
         public void SetRole(PermissionLevel role)
         {
             myFarm = new Farm();
-            myFarm.role = (int)role;
+            myRole = role;
             SetupPermissions();
         }
 
         public void SetupPermissions()
         {
-            if (myFarm == null)
+            if (myFarm.farmid < 1)
             {
                 myFarm.farmname = "No Farm Assigned";
                 myFarm.area = 0;
                 myFarm.farmid = 0;
             }
 
-            if (myFarm.role == (int)PermissionLevel.User)
+            if (myRole == PermissionLevel.User)
             {
                 butMenuSettings.IsEnabled = true;
                 butMenuUpload.IsEnabled = true;
                 butMenuDownload.IsEnabled = true;
             }
-            else if (myFarm.role == (int)PermissionLevel.Admin)
+            else if (myRole == PermissionLevel.Admin)
             {
                 butMenuAdmin.IsEnabled = true;
                 butMenuSettings.IsEnabled = true;
                 butMenuUpload.IsEnabled = true;
                 butMenuDownload.IsEnabled = true;
             }
-
-            
         }
 
         private void UpdateUploadStatus(UploadStatus upst)
@@ -184,7 +183,7 @@ namespace GUI
                 isProcessing = true;
                 weekly = ManageData.WeeklyLoadData();
                 comments = ManageData.CommentsLoadData();
-                try { paddocks = ManageData.PaddocksLoadData(); } catch (Exception ie) { }
+                try { paddocks = ManageData.PaddocksLoadData(); } catch { }
                 farmsupp = ManageData.FarmSuppLoadData();
                 labels = ManageData.LabelLoadData();
                 calculations = ManageData.CalcLoadData();
@@ -208,24 +207,27 @@ namespace GUI
                     tmp = true;
                 }
             }
-            if (farmsupp != null && !isProcessing)
+            if (farmsupp != null)
             {
                 try
                 {
                     this.Cursor = Cursors.Wait;
                     foreach (FarmSupplements fsdata in farmsupp)
                     {
+                        MessageBox.Show(fsdata.Sdate.ToString());
+                        File.WriteAllText("debugggggg", string.Format("http://swartkat.fossul.com/data/insertfarmsupplements?farmid={0}&sdate={1}&cows={2}&supplements={3}", fsdata.FarmID, fsdata.Sdate, fsdata.Cows, fsdata.Supplements));
                         UploadData.UploadFarmSuppGet(fsdata);
                     }
                     this.Cursor = Cursors.Arrow;
                 }
                 catch (Exception ie)
                 {
-                    MessageBox.Show(ie.ToString());
+                    //
+                    MessageBox.Show("Farm supp ### " + ie.ToString());
                     tmp = true;
                 }
             }
-            if (paddocks != null && !isProcessing)
+            if (paddocks != null)
             {
                 try
                 {
@@ -242,7 +244,7 @@ namespace GUI
                     tmp = true;
                 }
             }
-            if (paddocks != null && !isProcessing)
+            if (comments != null)
             {
                 try
                 {
@@ -384,7 +386,7 @@ namespace GUI
                 try
                 {
                     Farm f = DownloadData.GetUserFarm(u.email);     //retrieve the farm details fromt the server that are assigned to the email address supplied
-                    cboModuserRoles.SelectedIndex = f.role;         //input the received data into the input fields
+                    cboModuserRoles.SelectedIndex = (int)DownloadData.GetUserRole(u.email);//input the received data into the input fields
                     cboModuserfarmlist.SelectedIndex = f.farmid;    //
                 }
                 catch
@@ -525,7 +527,7 @@ namespace GUI
         private void butGenerateConsolidatedReport_Click(object sender, RoutedEventArgs e)
         {
             string date = cboColsonidatedReportDate.SelectedValue.ToString();
-            Dictionary<string, string> dict = DownloadData.GetWeeklyFarmData(date);
+            Dictionary<int, string> dict = DownloadData.GetWeeklyFarmData(date);
 
             processConsolidated p = new processConsolidated();
             if (File.Exists(Utilities.LOCAL_REPORT_URL))
@@ -533,21 +535,23 @@ namespace GUI
                 try
                 {
                     File.Delete(Utilities.LOCAL_REPORT_URL);
-                    try
-                    {
-                        //p.createWorkBook(Utilities.LOCAL_REPORT_URL, DateTime.Parse(date), dict);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Something went wrong, please contact your system administrator." + Environment.NewLine + "Errorcode: Fortuna#197");
-                    }
                 }
                 catch
                 {
                     MessageBox.Show("The previous report is currently open in another application. Please close the application that is using this file.");
                 }
             }
-            
+            DateTime dt = DateTime.Parse(date);
+            MessageBox.Show(string.Format("DateTime (dt): {0}\nString (date): {1}",dt.ToString(),date));
+            p.createWorkBook(Utilities.LOCAL_REPORT_URL, date, dict);
+            try
+            {
+                
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong when attempting to create your consolidated report.");
+            }
         }
     }
 }

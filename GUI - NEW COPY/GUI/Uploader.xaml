@@ -24,7 +24,7 @@
                 <Label x:Name="labFarmNameHome" Content="Farm name" Foreground="White" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="32" Margin="0" HorizontalAlignment="Left" Cursor="" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="400"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="panUsers" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top">
+        <StackPanel x:Name="panUsers" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsHidden="True">
             <StackPanel x:Name="ContentMainAdmin" Height="575" Background="#FF323232" Margin="0,25,0,0">
                 <ListView x:Name="lstUsers" Height="240" Width="500" HorizontalAlignment="Left" Margin="31,30,0,0" RenderTransformOrigin="0.5,0.5" Cursor="Arrow">
                     <ListView.RenderTransform>
@@ -150,7 +150,7 @@
                 <StackPanel x:Name="panMessage1" Height="175" Width="555" HorizontalAlignment="Left" Margin="0,-175,0,0"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="panUpload" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsLocked="True" d:IsHidden="True">
+        <StackPanel x:Name="panUpload" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top">
             <Image x:Name="imgHeader1" Height="450" Margin="0,-75,0,0" VerticalAlignment="Top" Source="Images/fgl_banner_farm_patiki_160219_165631.jpg" RenderTransformOrigin="0.5,0.5" Width="790" UseLayoutRounding="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="UniformToFill">
                 <Image.LayoutTransform>
                     <TransformGroup>

@@ -11,6 +11,5 @@ namespace GUI.Scripts
         public int farmid { get; set; }
         public string farmname { get; set; }
         public double area { get; set; }
-        public int role { get; set; }
     }
 }

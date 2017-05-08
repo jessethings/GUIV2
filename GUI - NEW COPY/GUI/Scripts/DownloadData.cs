@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 
 namespace GUI.Scripts
 {
@@ -31,7 +32,7 @@ namespace GUI.Scripts
 
         public static Farm GetUserFarm(string email)
         {
-            string tmp = DownloadData.ReceiveResponse(string.Format("http://swartkat.fossul.com/gui/returnuserfarm?email={0}", email));
+            string tmp = DownloadData.ReceiveResponse(string.Format("http://swartkat.fossul.com/gui/getusersfarm?email={0}", email));
             tmp = tmp.Substring(1, tmp.Length - 2);
             tmp = tmp.Replace("\"", "");
             string[] tmp2 = tmp.Split(',');
@@ -39,16 +40,27 @@ namespace GUI.Scripts
             f.farmid = int.Parse(tmp2[0]);
             f.farmname = tmp2[1];
             f.area = double.Parse(tmp2[2]);
-            f.role = int.Parse(tmp2[3]);
             return f;
         }
 
-        public static Dictionary<string, string> GetWeeklyFarmData(string date)
+        public static Dictionary<int, string> GetWeeklyFarmData(string date)
         {
-            string tmp = DownloadData.ReceiveResponse(string.Format("http://swartkat.fossul.com/gui/getdata?fulldate={0}", date));
-            //return JsonConvert.DeserializeObject<List<FullFarm>>(tmp);
-            Dictionary<string, string> dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(tmp);
-            return dict;
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            var JSONObj = ser.Deserialize<Dictionary<string, string>[]>(ReceiveResponse(string.Format("http://swartkat.fossul.com/gui/getdata?fulldate={0}", date))); //JSON decoded
+            Dictionary<int, string> tmp = new Dictionary<int, string>();
+            foreach (Dictionary<string, string> map in JSONObj)
+            {
+                int id = int.Parse(map["farmid"]);
+                string data = map["data"];
+                tmp.Add(id, data);
+            }
+            return tmp;
+        }
+
+        public static PermissionLevel GetUserRole(string userEmail)
+        {
+            string tmp = ReceiveResponse(string.Format("http://swartkat.fossul.com/gui/getuserrole?email={0}", userEmail));
+            return (PermissionLevel)(int.Parse(tmp));
         }
 
     }

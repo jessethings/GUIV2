@@ -18,9 +18,9 @@ using GUI.Scripts;
 
 namespace GUI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    // <summary>
+    // Interaction logic for MainWindow.xaml
+    // </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -72,27 +72,18 @@ namespace GUI
                 SaveData();
             Uploader u = new Uploader();
             Farm f = new Farm();
-            f = DownloadData.GetUserFarm(txtUsername.Text);
-            MessageBox.Show("1");
-            u.SetRole((PermissionLevel)f.role);
-            MessageBox.Show("3");
-            u.SetFarm(f);
-            MessageBox.Show("2");
+            
+            u.SetRole(DownloadData.GetUserRole(txtUsername.Text));
             try
             {
-                /*Farm f = new Farm();
                 f = DownloadData.GetUserFarm(txtUsername.Text);
-                MessageBox.Show("1");
-                u.SetRole((PermissionLevel)f.role);
-                MessageBox.Show("3");
                 u.SetFarm(f);
-                MessageBox.Show("2");*/
             }
             catch
             {
                 MessageBox.Show("An error occured when attempting to load your farm details.");
             }
-            u.SetupPermissions();
+
             this.Close();
             u.ShowDialog();           
         }

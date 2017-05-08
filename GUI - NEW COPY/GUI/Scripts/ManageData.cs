@@ -20,8 +20,8 @@ namespace GUI.Scripts
         public static string ProcessFile(string url, Farm myfarm)
         {
             string retunString = "";
-            try
-            {
+            //try
+           // {
                 if (File.Exists(Utilities.LOCAL_DB_URL))
                     File.Delete(Utilities.LOCAL_DB_URL);
                 FarmIdentificationManagement fid = new FarmIdentificationManagement();
@@ -70,11 +70,11 @@ namespace GUI.Scripts
                 //}
 
                 return retunString;
-            }
+            /*}
             catch
             {
                 return "The database is currently open, please close the application that has it open.";
-            }
+            }*/
         }
 
         public static List<WeeklyData> WeeklyLoadData()

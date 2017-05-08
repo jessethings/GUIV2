@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FortunaExcelProcessing</name>
+    </assembly>
+    <members>
+        <member name="T:FortunaExcelProcessing.ErrorHandling.Error">
+            <summary>
+            Instantiate one of these objects when a hard or soft error occurs
+            It is reccomended to add these to the public static lists conatained in 'Error Reporter'
+            </summary>
+        </member>
+        <member name="P:FortunaExcelProcessing.ErrorHandling.Error.Cell">
+            <summary>
+            The cell the error occurs in
+            </summary>
+        </member>
+        <member name="P:FortunaExcelProcessing.ErrorHandling.Error.Description">
+            <summary>
+            The description for the error
+            </summary>
+        </member>
+        <member name="P:FortunaExcelProcessing.ErrorHandling.Error.Severity">
+            <summary>
+            The level of severity for the error
+            </summary>
+        </member>
+        <member name="P:FortunaExcelProcessing.ErrorHandling.Error.ErrorCode">
+            <summary>
+            The code assigned for the error, refer to official documentation
+            </summary>
+        </member>
+        <member name="P:FortunaExcelProcessing.ErrorHandling.Error.ExtraInfo">
+            <summary>
+            For any extra information related to the error
+            </summary>
+        </member>
+        <member name="M:FortunaExcelProcessing.ErrorHandling.Error.#ctor(System.String)">
+            <summary>
+            Intended for handling of hard errors, that don't pertain to single cell errors
+            </summary>
+            <param name="s">String for the basic error information</param>
+        </member>
+        <member name="M:FortunaExcelProcessing.ErrorHandling.Error.#ctor(NPOI.SS.UserModel.ICell,System.String)">
+            <summary>
+            Intended for handling of soft errors, soft errors require the offending cell and the description of the error
+            </summary>
+            <param name="c">The cell that the error occurs in</param>
+            <param name="s">String for the basic error information</param>
+        </member>
+        <member name="T:FortunaExcelProcessing.ErrorHandling.ErrorReporter">
+            <summary>
+            The Error reporter is intended to take any exceptions from the GUI that occur when processing the excel documents
+            Please note that exceptions must be added to the list, 
+            </summary>
+        </member>
+        <member name="M:FortunaExcelProcessing.ErrorHandling.ErrorReporter.ResetErrors">
+            <summary>
+            Clear error lists
+            </summary>
+        </member>
+        <member name="M:FortunaExcelProcessing.WeeklyProcessing.EditPaddocksTable.CheckForExistingData">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
