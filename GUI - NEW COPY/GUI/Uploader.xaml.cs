@@ -20,6 +20,7 @@ using GUI.Scripts;
 using Newtonsoft.Json;
 using FortunaExcelProcessing.ConsilidatedReport;
 
+
 namespace GUI
 {
     // <summary>
@@ -30,6 +31,7 @@ namespace GUI
         string url;
         bool isProcessing;
         Farm myFarm;
+        int myID;
         PermissionLevel myRole;
         bool uploadIsComplete = false;
 
@@ -47,12 +49,17 @@ namespace GUI
             InitializeComponent();
             DisableEnableWindows(ActiveWindow.Home);
 
-            DateTime date = new DateTime(2016, 06, 6);
+            /*DateTime date = new DateTime(2016, 06, 6);
             for (int i = 1; i <= 52; i++)
             {
                 cboColsonidatedReportDate.Items.Add(date.ToString("yyyy-MM-dd"));
                 date = date.AddDays(7);
-            }
+            }*/
+            //List<DateTime> dates = DownloadData.GetWeeklyDataDates()
+            //foreach(var in )
+            //cboColsonidatedReportDate.Items.Add
+
+            txtbxSaveDir.Text = Utilities.SAVE_FOLDER;
         }
 
         public void SetFarm(Farm farm)
@@ -173,6 +180,7 @@ namespace GUI
                 MessageBox.Show(url);
             }
             isProcessing = false;
+            MessageBox.Show("Process Complete!");
         }
 
         private void butUploadMemoryData_Click(object sender, RoutedEventArgs e)
@@ -264,6 +272,7 @@ namespace GUI
                 uploadIsComplete = true;
             }
             isProcessing = false;
+            MessageBox.Show("Process Complete!");
         }
 
         private void panTitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -522,7 +531,7 @@ namespace GUI
 
         private void butGenerateConsolidatedReport1_Click(object sender, RoutedEventArgs e)
         {
-            
+            MessageBox.Show("error");
         }
 
         private void butGenerateConsolidatedReport_Click(object sender, RoutedEventArgs e)
@@ -552,6 +561,20 @@ namespace GUI
             {
                 MessageBox.Show("Something went wrong when attempting to create your consolidated report.");
             }
+            MessageBox.Show("Process Complete!");
+        }
+
+        private void butOpenColsolidatedReport_Click(object sender, RoutedEventArgs e)
+        {
+            if (Directory.Exists(Utilities.SAVE_FOLDER))
+                System.Diagnostics.Process.Start(Utilities.SAVE_FOLDER);
+            else
+                MessageBox.Show("There is currently no data available at this location");
+        }
+
+        private void butMenuWebsite_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.fortunagroup.net.nz/");
         }
     }
 }

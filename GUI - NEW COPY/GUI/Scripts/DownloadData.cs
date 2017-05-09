@@ -63,5 +63,10 @@ namespace GUI.Scripts
             return (PermissionLevel)(int.Parse(tmp));
         }
 
+        public static List<DateTime> GetWeeklyDataDates(int userID)
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            return ser.Deserialize<List<DateTime>>(ReceiveResponse(string.Format("http://swartkat.fossul.com/gui/getfarmdates?userid={0}", userID))); //JSON decoded
+        }
     }
 }

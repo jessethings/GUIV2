@@ -27,8 +27,9 @@ namespace GUI.Scripts
     public static class Utilities
     {
         public const string SAVE_DATA_URL = @"save.tf";
-        public const string LOCAL_DB_URL = @"C:\Database\database.sqlite";
-        public const string LOCAL_REPORT_URL = @"C:\Database\ConsolidatedReport.xlsx";
+        public static string SAVE_FOLDER = @"C:\Database";
+        public static string LOCAL_DB_URL = SAVE_FOLDER + @"\database.sqlite";
+        public static string LOCAL_REPORT_URL = SAVE_FOLDER + @"\ConsolidatedReport.xlsx";
     }
 
     public enum PermissionLevel

@@ -15,7 +15,7 @@ namespace GUI.Scripts
 {
     public static class ManageData
     {
-        private const string CSTRING = @"Data Source=" + Utilities.LOCAL_DB_URL + ";Version=3;";
+        private static string CSTRING = @"Data Source=" + Utilities.LOCAL_DB_URL + ";Version=3;";
 
         public static string ProcessFile(string url, Farm myfarm)
         {

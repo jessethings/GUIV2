@@ -148,6 +148,9 @@ namespace GUI
                         u.name = txtRegName.Text;
                         u.password = txtRegPass.Password;
                         UploadData.CreateUser(u);
+                        MessageBox.Show("User details sent!");
+                        panRegister.Visibility = Visibility.Hidden;
+                        panLogin.Visibility = Visibility.Visible;
                     }
                     else
                         MessageBox.Show("You have used invalid characters as your password" + Environment.NewLine + @"Account passwords are not allowed the characters ' ', '&', '='");
