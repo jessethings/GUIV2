@@ -38,4 +38,11 @@ namespace GUI.Scripts
         User = 1,
         Admin = 0
     }
+
+    public enum UserUpdateState
+    {
+        CreateNew = 0,
+        UpdateAll = 1,
+        IgnorePassword = 2
+    }
 }

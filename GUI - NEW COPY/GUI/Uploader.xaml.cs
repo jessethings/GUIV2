@@ -31,7 +31,7 @@ namespace GUI
         string url;
         bool isProcessing;
         Farm myFarm;
-        int myID;
+
         PermissionLevel myRole;
         bool uploadIsComplete = false;
 
@@ -58,7 +58,7 @@ namespace GUI
 
             List<User> userList = DownloadData.GetAllUsers();
             List<DateTime> dateList = new List<DateTime>();
-            foreach(User u in userList)
+            foreach (User u in userList)
             {
                 List<tmpdate> tmp;
                 tmp = DownloadData.GetWeeklyDataDates(u.id);
@@ -416,14 +416,23 @@ namespace GUI
             try
             {
                 User u = (User)lstUsers.SelectedItems[0];           //get the first selected row from the user list view and assign it to the textboxes as predefined text
+                
                 try
                 {
-                    Farm f = DownloadData.GetUserFarm(u.email);     //retrieve the farm details fromt the server that are assigned to the email address supplied
                     cboModuserRoles.SelectedIndex = (int)DownloadData.GetUserRole(u.email);//input the received data into the input fields
+                }
+                catch
+                {
+                    MessageBox.Show("Unable to get the role assigned to this user");//return error if it fails
+                }
+                try
+                {
+                    Farm f = DownloadData.GetUserFarm(u.email);     //retrieve the farm details fromt the server that are assigned to the 
                     cboModuserfarmlist.SelectedIndex = f.farmid;    //
                 }
                 catch
                 {
+                    cboModuserfarmlist.SelectedIndex = 0;    //
                     MessageBox.Show("Unable to get a farm assigned to this user");//return error if it fails
                 }
                 try
@@ -451,55 +460,94 @@ namespace GUI
 
         private void butModuserSaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            if (txtModuserPassword.Password == txtModuserPasswordConfirm.Password)//ensure the passwords match up
-            {
-                User u2 = new User();                               //establish temporary user object which will contain the old pre-edited values
-                User u = new User();                                //establish temporary user associated with the new changes
-                u.name = txtModuserName.Text;                       //assign values that are found in the input fields to the new user object
-                u.password = txtModuserPassword.Password;           //
-                u.email = txtModuserEmail.Text;                     //
-                
-                try
-                {
-                    u2 = (User)lstUsers.SelectedItems[0];           //put the old data from the list view into the old user object
-                }
-                catch
-                {
-                    MessageBox.Show("Please select a user");        
-                }
+            User u = new User();                               //establish temporary user object which will contain the old pre-edited values
 
-                if (txtModuserPassword.Password != "" && txtModuserName.Text != "" && txtModuserEmail.Text != "")//ensure there is no empty data being uploaded
+            try
+            {
+                u = (User)lstUsers.SelectedItems[0];           //put the old data from the list view into the old user object
+            }
+            catch { }
+
+            if (txtModuserID.Text == "" || txtModuserID.Text == null)
+            {
+                Thing(UserUpdateState.CreateNew);
+            }
+            else if (txtModuserPassword.Password.Length > 0 && txtModuserID.Text != "")
+            {
+                Thing(UserUpdateState.UpdateAll, u);
+            }
+            else
+            {
+                Thing(UserUpdateState.IgnorePassword, u);
+            }
+        }
+
+        public void Thing(UserUpdateState us, User oldUser = null)
+        {
+            User u = new User();
+            if (txtModuserEmail.Text.Length > 5)
+            {
+                if (txtModuserName.Text.Length > 3)
                 {
-                    if (txtModuserID.Text == "" || txtModuserID.Text == null)//is the user being created or modified? this textfield is read only so this dictates which of the two it is
+                    u.email = txtModuserEmail.Text;
+                    u.name = txtModuserName.Text;
+
+                    if (us == UserUpdateState.IgnorePassword)
                     {
-                        UploadData.CreateUser(u);                   //attempt to create a new user
-                        MessageBox.Show("User Created");
+                        if (oldUser != null)
+                        {
+                            UploadData.UpdateUser(oldUser.email, u, false);
+                            MessageBox.Show("Process complete!");
+                        }
+                        else
+                            MessageBox.Show("An error occured when retrieving your selected user");
+                    }
+                    else if (txtModuserPassword.Password.Length > 5 && txtModuserPassword.Password == txtModuserPasswordConfirm.Password)
+                    {
+                        u.password = txtModuserPassword.Password;
+
+                        if (us == UserUpdateState.CreateNew)
+                        {
+                            UploadData.CreateUser(u);
+                            MessageBox.Show("Process complete!");
+                        }
+                        else if (us == UserUpdateState.UpdateAll)
+                        {
+                            u.id = int.Parse(txtModuserID.Text);
+                            if (oldUser != null)
+                            {
+                                UploadData.UpdateUser(oldUser.email, u, true);
+                                MessageBox.Show("Process complete!");
+                            }
+                            else
+                                MessageBox.Show("An error occured when retrieving your selected user");
+                        }
                     }
                     else
+                        MessageBox.Show(string.Format("Your passwords either do not match or are not longer than 5 characters"));
+
+                    try
                     {
-                        UploadData.UpdateUser(u2.email, u);         //attempt to modify an existing user
-                        try
-                        {
-                            UploadData.AssignFarm(cboModuserfarmlist.SelectedIndex, u2.email);//update the farm assigned to this user
-                            MessageBox.Show("Complete");
-                        }
-                        catch
-                        {
-                            MessageBox.Show("An error ocurred with assigning the farm id to this user");//report the error if any occur
-                        }
+                        UploadData.UpdatePermissions(txtModuserEmail.Text, cboModuserRoles.SelectedIndex);//update the user's role
                     }
-                    UploadData.UpdatePermissions(txtModuserEmail.Text, cboModuserRoles.SelectedIndex);//update the user's role
+                    catch
+                    {
+                        MessageBox.Show("There was an error updating this user's permissions");
+                    }
+                    try
+                    {
+                        UploadData.AssignFarm(cboModuserfarmlist.SelectedIndex, oldUser.email);//update the farm assigned to this user
+                    }
+                    catch
+                    {
+                        MessageBox.Show("There was an error asigning a farm to this user");
+                    }
                 }
                 else
-                    MessageBox.Show("Please fill in all fields");
+                    MessageBox.Show(string.Format("Your nickname is not longer than 3 characters"));
             }
-            /*}
-            catch
-            {
-                MessageBox.Show("Error: Fortuna#324");
-            }*/
+            else
+                MessageBox.Show(string.Format("Your email is not longer than 5 characters"));
         }
 
         private void butModuserBack_Click(object sender, RoutedEventArgs e)
@@ -544,6 +592,7 @@ namespace GUI
             {
                 MessageBox.Show("Error: Fortuna#325");
             }
+            MessageBox.Show("Process complete!");
         }
 
         private void butModifyUser_Click_1(object sender, RoutedEventArgs e)

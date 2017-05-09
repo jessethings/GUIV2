@@ -20,7 +20,7 @@
                 </Image.LayoutTransform>
             </Image>
             <StackPanel Height="128" Margin="195,-570,195,0" Width="400" Background="#00000000">
-                <Label x:Name="labFarmNameHome" Content="Welcome" Foreground="#FF5F5F5F" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="72" Margin="0" HorizontalAlignment="Center" Cursor="" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="334" VerticalContentAlignment="Center"/>
+                <Label x:Name="labFarmNameHome" Content="Welcome" Foreground="#FF5F5F5F" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="72" Margin="-196,0,-195,0" HorizontalAlignment="Center" Cursor="" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="791" VerticalContentAlignment="Center"/>
             </StackPanel>
         </StackPanel>
         <StackPanel x:Name="panUsers" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsLocked="True" d:IsHidden="True">
@@ -65,7 +65,7 @@
                 <Button x:Name="butModuserCreateUser" Content="Create User" Width="200" Margin="0,-460,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Right" Click="butModuserCreateUser_Click"/>
                 <Button x:Name="butModifyCreatefarm" Content="Create Farm" Width="200" Margin="0,-240,30,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Style="{DynamicResource UploadButtonsStyle}" Height="40" FontFamily="/GUI;component/Fonts/#Roboto Light" FontSize="20" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Right" Click="butModifyUser_Click_1"/>
             </StackPanel>
-            <StackPanel x:Name="panModifyUser" Height="575" Background="#FF323232" Margin="0,-575,0,0" d:IsLocked="True">
+            <StackPanel x:Name="panModifyUser" Height="575" Background="#FF323232" Margin="0,-575,0,0" d:IsHidden="True">
                 <TextBox x:Name="txtModuserID" TextWrapping="Wrap" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Width="300" Margin="0,250,250,0" HorizontalAlignment="Right" Height="37" Tag="" ToolTip="The user's unique ID" Cursor="IBeam" IsEnabled="False"/>
                 <TextBox x:Name="txtModuserName" TextWrapping="Wrap" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Width="300" Margin="0,5,250,0" HorizontalAlignment="Right" Height="37" Tag="" ToolTip="Enter the name of the user" Cursor="IBeam"/>
                 <TextBox x:Name="txtModuserEmail" TextWrapping="Wrap" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Width="300" Margin="0,5,250,0" HorizontalAlignment="Right" Height="37" Tag="" ToolTip="Enter the user's email address" Cursor="IBeam"/>
@@ -93,7 +93,7 @@
                     </Image.LayoutTransform>
                 </Image>
             </StackPanel>
-            <StackPanel x:Name="panModifyFarm" Height="575" Background="#FF323232" Margin="0,-575,0,0" d:IsHidden="True">
+            <StackPanel x:Name="panModifyFarm" Height="575" Background="#FF323232" Margin="0,-575,0,0">
                 <TextBox x:Name="txtModuserFarmid" TextWrapping="Wrap" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Width="300" Margin="0,400,250,0" HorizontalAlignment="Right" Height="37" Tag="" ToolTip="The user's unique ID" Cursor="IBeam" IsEnabled="False"/>
                 <TextBox x:Name="txtModuserFarmname" TextWrapping="Wrap" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Width="300" Margin="0,5,250,0" HorizontalAlignment="Right" Height="37" Tag="" ToolTip="The name of the farm" Cursor="IBeam"/>
                 <TextBox x:Name="txtModuserFarmarea" TextWrapping="Wrap" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Width="300" Margin="0,5,250,0" HorizontalAlignment="Right" Height="37" Tag="" ToolTip="The total land area of the farm" Cursor="IBeam"/>
@@ -131,7 +131,7 @@
                 <TextBox x:Name="txtbxSaveDir" TextWrapping="Wrap" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Width="500" HorizontalAlignment="Left" Margin="30,-40,0,0"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="panReport" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsHidden="True">
+        <StackPanel x:Name="panReport" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsHidden="True" d:IsLocked="True">
             <Image x:Name="imgHeader3" Height="350" Margin="0,25,0,0" VerticalAlignment="Top" Source="Images/fgl_banner_newsmedia.jpg" RenderTransformOrigin="0.5,0.5" Width="790" UseLayoutRounding="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="UniformToFill">
                 <Image.LayoutTransform>
                     <TransformGroup>

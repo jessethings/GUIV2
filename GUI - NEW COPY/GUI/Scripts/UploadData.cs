@@ -37,6 +37,14 @@ namespace GUI.Scripts
             UploadGet(string.Format("http://swartkat.fossul.com/gui/modifyuser?email={0}&newname={1}&newemail={2}&newpassword={3}", email, user.name, user.email, user.password));
         }
 
+        public static void UpdateUser(string email, User user, bool updatePassword)
+        {
+            if (updatePassword)
+                UploadGet(string.Format("http://swartkat.fossul.com/gui/modifyuser?email={0}&newname={1}&newemail={2}&newpassword={3}", email, user.name, user.email, user.password));
+            else
+                UploadGet(string.Format("http://swartkat.fossul.com/gui/modifyuser?email={0}&newname={1}&newemail={2}", email, user.name, user.email));
+        }
+
         public static void CreateFarm(Farm farm)
         {
             UploadGet(string.Format("http://swartkat.fossul.com/gui/createmodfarm?id={0}&name={1}&area={2}", farm.farmname, farm.farmname, farm.area));
