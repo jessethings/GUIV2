@@ -93,6 +93,7 @@
     <Compile Include="Scripts\FullFarm.cs" />
     <Compile Include="Scripts\LoginClass.cs" />
     <Compile Include="Scripts\ManageData.cs" />
+    <Compile Include="Scripts\tmpdate.cs" />
     <Compile Include="Scripts\UploadData.cs" />
     <Compile Include="Scripts\User.cs" />
     <Compile Include="Scripts\utilities.cs" />

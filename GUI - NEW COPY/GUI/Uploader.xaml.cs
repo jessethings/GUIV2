@@ -60,7 +60,8 @@ namespace GUI
             List<DateTime> dateList = new List<DateTime>();
             foreach(User u in userList)
             {
-                List<DateTime> tmp;
+                List<tmpdate> tmp;
+                tmp = DownloadData.GetWeeklyDataDates(u.id);
                 try
                 {
                     tmp = DownloadData.GetWeeklyDataDates(u.id);
@@ -69,19 +70,18 @@ namespace GUI
                 {
                     continue;
                 }
+                if (tmp == null)
+                    continue;
 
-                MessageBox.Show("u" + u.id);
-
-                foreach (DateTime dt in tmp)
+                foreach (tmpdate dt in tmp)
                 {
-                    MessageBox.Show("d" + dt);
-                    if (dateList.Contains(dt))
+                    //MessageBox.Show(dt + "");
+                    if (dateList.Contains(dt.sdate))
                         continue;
                     else
                     {
-                        dateList.Add(dt);
-                        cboColsonidatedReportDate.Items.Add(dt.ToString("yyyy-MM-dd"));
-                        MessageBox.Show("################");
+                        dateList.Add(dt.sdate);
+                        cboColsonidatedReportDate.Items.Add(dt.sdate.ToString("yyyy-MM-dd"));
                     }
                 }
             }
