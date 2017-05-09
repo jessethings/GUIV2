@@ -55,9 +55,36 @@ namespace GUI
                 cboColsonidatedReportDate.Items.Add(date.ToString("yyyy-MM-dd"));
                 date = date.AddDays(7);
             }*/
-            //List<DateTime> dates = DownloadData.GetWeeklyDataDates()
-            //foreach(var in )
-            //cboColsonidatedReportDate.Items.Add
+
+            List<User> userList = DownloadData.GetAllUsers();
+            List<DateTime> dateList = new List<DateTime>();
+            foreach(User u in userList)
+            {
+                List<DateTime> tmp;
+                try
+                {
+                    tmp = DownloadData.GetWeeklyDataDates(u.id);
+                }
+                catch
+                {
+                    continue;
+                }
+
+                MessageBox.Show("u" + u.id);
+
+                foreach (DateTime dt in tmp)
+                {
+                    MessageBox.Show("d" + dt);
+                    if (dateList.Contains(dt))
+                        continue;
+                    else
+                    {
+                        dateList.Add(dt);
+                        cboColsonidatedReportDate.Items.Add(dt.ToString("yyyy-MM-dd"));
+                        MessageBox.Show("################");
+                    }
+                }
+            }
 
             txtbxSaveDir.Text = Utilities.SAVE_FOLDER;
         }
@@ -552,9 +579,10 @@ namespace GUI
                 }
             }
             DateTime dt = DateTime.Parse(date);
+
             try
             {
-                MessageBox.Show(dict.Count + "");
+                Directory.CreateDirectory(Utilities.SAVE_FOLDER);
                 p.createWorkBook(Utilities.LOCAL_REPORT_URL, date, dict);
             }
             catch
