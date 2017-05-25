@@ -181,7 +181,7 @@
             <Button x:Name="butClose" Content="X" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="24" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="15" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Cursor="Hand" BorderThickness="0" Click="butClose_Click"/>
             <Button x:Name="butMinimise" Content="__" HorizontalContentAlignment="Center" Width="24" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="15" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,-24,24,0" FontWeight="Bold" BorderThickness="0" Click="butMinimise_Click"/>
         </StackPanel>
-        <StackPanel x:Name="panMenu" Height="600" Width="209.7" HorizontalAlignment="Left" Background="White" Margin="0,-600,0,0" UseLayoutRounding="False" d:IsLocked="True">
+        <StackPanel x:Name="panMenu" Height="600" Width="209.7" HorizontalAlignment="Left" Background="White" Margin="0,-600,0,0" UseLayoutRounding="False">
             <StackPanel.Effect>
                 <DropShadowEffect ShadowDepth="1" Opacity="0.5" BlurRadius="1" Color="#FF323232"/>
             </StackPanel.Effect>
@@ -261,6 +261,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
+            <Label x:Name="labFarmNameMenu_Copy" Content="Build 0.4.1" Margin="5,150,0,0" Width="200" HorizontalAlignment="Left" ToolTip="" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Foreground="Black" Background="{x:Null}" BorderThickness="0,5,0,0" IsEnabled="False" VerticalAlignment="Bottom" Opacity="0.25"/>
         </StackPanel>
         <StackPanel x:Name="panHome_Copy" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,0,0,0" VerticalAlignment="Top" IsEnabled="False" d:IsLocked="True" d:IsHidden="True">
             <Image x:Name="imgHeader2" Height="602" Margin="0" VerticalAlignment="Top" Source="Images/fgl_banner_contactus.jpg" RenderTransformOrigin="0.5,0.5" Width="790" Stretch="UniformToFill" StretchDirection="DownOnly" UseLayoutRounding="False" ScrollViewer.VerticalScrollBarVisibility="Disabled">
