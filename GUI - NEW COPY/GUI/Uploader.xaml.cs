@@ -19,7 +19,7 @@ using FortunaExcelProcessing;
 using GUI.Scripts;
 using Newtonsoft.Json;
 using FortunaExcelProcessing.ConsilidatedReport;
-
+using System.Net;
 
 namespace GUI
 {
@@ -191,12 +191,22 @@ namespace GUI
 
                 if (myFarm != null)
                 {
-                    string res = ManageData.ProcessFile(url, myFarm);
+                    string res;
+                    try
+                    {
+                        res = ManageData.ProcessFile(url, myFarm);
+                    }
+                    catch
+                    {
+                        res = "This software appears to be malfunctioning, please restart the application and try again.";
+                    }
                     if (res != "" && res != null)
+                    {
                         MessageBox.Show(res);
 
-                    if (!tmp)
-                        UpdateUploadStatus(UploadStatus.GenerateLocal);
+                        if (!tmp)
+                            UpdateUploadStatus(UploadStatus.GenerateLocal);
+                    }
                 }
                 else
                     MessageBox.Show("You are not currently assigned to any farm.");
@@ -226,8 +236,8 @@ namespace GUI
                 try
                 {
                     this.Cursor = Cursors.Wait;
-                    //UploadData(new WeeklyData(1, 42, DateTime.Now, "HelloWorld"));
-                    //UploadDataGet(new WeeklyData(1, 42, DateTime.Now, "HelloWorld"));
+                    ////UploadData(new WeeklyData(1, 42, DateTime.Now, "HelloWorld"));
+                    ////UploadDataGet(new WeeklyData(1, 42, DateTime.Now, "HelloWorld"));
 
                     foreach (WeeklyData wdata in weekly)
                     {
@@ -293,6 +303,7 @@ namespace GUI
                     tmp = true;
                 }
             }
+            Upload("app/uploads", url, System.IO.Path.GetFileName(url));
             if (!tmp)
             {
                 UpdateUploadStatus(UploadStatus.UploadLocal);
@@ -300,6 +311,31 @@ namespace GUI
             }
             isProcessing = false;
             MessageBox.Show("Process Complete!");
+        }
+
+        const string FTP_USERNAME = "swartkat@kensnz.com";
+        const string FTP_PASSWORD = "Heise@2017";
+
+        private bool Upload(string dir, string fullname, string filename)
+        {
+            if (fullname == null) return false;
+            if (!File.Exists(fullname)) return false;
+            bool success = false;
+            string uri = string.Format(@"ftp://swartkat.fossul.com/storage/{0}/{1}", dir, filename);
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    client.Credentials = new NetworkCredential(FTP_USERNAME, FTP_PASSWORD);
+                    client.UploadFile(uri, "STOR", fullname);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("Could not upload file\n{0}\n{1}", dir, ex.Message));
+                success = false;
+            }
+            return success;
         }
 
         private void panTitleBar_MouseDown(object sender, MouseButtonEventArgs e)

@@ -155,7 +155,7 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="panUpload" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top" d:IsLocked="True" d:IsHidden="True">
+        <StackPanel x:Name="panUpload" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,-600,0,0" VerticalAlignment="Top">
             <Image x:Name="imgHeader1" Height="450" Margin="0,-75,0,0" VerticalAlignment="Top" Source="Images/fgl_banner_farm_patiki_160219_165631.jpg" RenderTransformOrigin="0.5,0.5" Width="790" UseLayoutRounding="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="UniformToFill">
                 <Image.LayoutTransform>
                     <TransformGroup>
@@ -261,7 +261,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Label x:Name="labFarmNameMenu_Copy" Content="Build 0.4.1" Margin="5,150,0,0" Width="200" HorizontalAlignment="Left" ToolTip="" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Foreground="Black" Background="{x:Null}" BorderThickness="0,5,0,0" IsEnabled="False" VerticalAlignment="Bottom" Opacity="0.25"/>
+            <Label x:Name="labFarmNameMenu_Copy" Content="Build 0.4.2" Margin="5,150,0,0" Width="200" HorizontalAlignment="Left" ToolTip="" FontFamily="/GUI;component/Fonts/#Open Sans" FontSize="20" Foreground="Black" Background="{x:Null}" BorderThickness="0,5,0,0" IsEnabled="False" VerticalAlignment="Bottom" Opacity="0.25"/>
         </StackPanel>
         <StackPanel x:Name="panHome_Copy" Height="600" Width="790" HorizontalAlignment="Left" Margin="210,0,0,0" VerticalAlignment="Top" IsEnabled="False" d:IsLocked="True" d:IsHidden="True">
             <Image x:Name="imgHeader2" Height="602" Margin="0" VerticalAlignment="Top" Source="Images/fgl_banner_contactus.jpg" RenderTransformOrigin="0.5,0.5" Width="790" Stretch="UniformToFill" StretchDirection="DownOnly" UseLayoutRounding="False" ScrollViewer.VerticalScrollBarVisibility="Disabled">
