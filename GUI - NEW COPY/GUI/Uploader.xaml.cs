@@ -300,6 +300,7 @@ namespace GUI
             }
             isProcessing = false;
             MessageBox.Show("Process Complete!");
+            
         }
 
         private void panTitleBar_MouseDown(object sender, MouseButtonEventArgs e)
