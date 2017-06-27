@@ -311,6 +311,7 @@ namespace GUI
             }
             isProcessing = false;
             MessageBox.Show("Process Complete!");
+            
         }
 
         const string FTP_USERNAME = "swartkat@kensnz.com";
